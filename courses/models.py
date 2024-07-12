@@ -102,9 +102,9 @@ class Comment(BaseModel):
     comment = models.TextField()
     is_published = models.BooleanField(default=True)
     rating = models.CharField(max_length=100, choices=RatingChoices.choices, default=RatingChoices.Zero.value)
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments')
-    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
-    author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments')
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
+    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
+    author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
 
 
 class User(AbstractBaseUser, PermissionsMixin):

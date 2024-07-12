@@ -45,21 +45,26 @@ class CoursesPage(View):
 
 
 class AddComment(View):
-    def get(self, request):
+    def get(self, request, slug):
         form = CommentForm()
-        return render(request, 'courses/course_detail.html', {'form': form})
+        return render(request, 'courses/course_detail.html', {'form': form, 'slug': slug})
 
-    def post(self, request):
+    def post(self, request, slug):
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.name = request.POST.get('name')
-            comment.email = request.POST.get('email')
-            comment.comment = request.POST.get('comment')
-            comment.rating = request.POST.get('rating')
+            course_id = get_object_or_404(Course, slug=slug)
+
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            comment = form.cleaned_data['comment']
+            rating = form.cleaned_data['rating']
+
+            comment = Comment(name=name, email=email, rating=rating, comment=comment, course_id=course_id)
             comment.save()
 
-            return redirect('course')
+            return redirect('c_detail', slug=slug)
+        return redirect('c_detail', slug=slug)
+
 
 
 class ContactPage(View):
