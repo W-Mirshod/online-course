@@ -73,7 +73,14 @@
                     {% for course in courses %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
-                                <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
+                                {% if course.image %}
+                                    <a href="{% url 'c_detail' course.slug %}"><img class=" img-fluid" src="
+                                    {{ course.image.url }}" alt=""></a>
+                                {% else %}
+                                    <a href="{% url 'c_detail' course.slug %}">
+                                        <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
+                                    </a>
+                                {% endif %}
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
                                         <small class="m-0"><i
@@ -82,7 +89,7 @@
                                         <small class="m-0"><i
                                                 class="far fa-clock text-primary mr-2"></i>{{ course.hours }}h {{ course.minutes }}m</small>
                                     </div>
-                                    <a class="h5" href="">{{ course.title }}</a>
+                                    <a class="h5" href="{% url 'c_detail' course.slug %}">{{ course.title }}</a>
                                     <div class="border-top mt-4 pt-4">
                                         <div class="d-flex justify-content-between">
                                             <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5

@@ -1,5 +1,5 @@
 from django import forms
-from courses.models import Course, Category, User
+from courses.models import Course, Category, User, Comment
 from teachers.models import Teacher
 
 
@@ -39,3 +39,10 @@ class SignUpForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+class CommentForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    email = forms.EmailField()
+    rating = forms.IntegerField(min_value=1, max_value=5)
+    comment = forms.CharField(widget=forms.Textarea)

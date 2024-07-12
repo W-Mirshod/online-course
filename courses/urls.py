@@ -1,6 +1,6 @@
 from django.urls import path
-
-from courses.views.views import IndexPage, CoursesPage, ContactPage, AboutPage, BaseIndexPage, CDetailPage, CGDetailPage
+from courses.views.details import CDetailPage, CGDetailPage
+from courses.views.views import IndexPage, CoursesPage, ContactPage, AboutPage, BaseIndexPage
 from courses.views.authentication import SignUpView, LogInView, LogOutView
 
 urlpatterns = [

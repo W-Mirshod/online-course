@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views import View
+from django.views.generic import FormView
+
 from blogs.models import Blog
+from courses.forms import CommentForm
 from courses.models import Course, Category, Comment
 from teachers.models import Teacher
 
@@ -41,34 +44,20 @@ class CoursesPage(View):
         return render(request, 'courses/course.html', context)
 
 
-class CDetailPage(View):
-    def get(self, request, slug):
-        course = Course.objects.get(slug=slug)
-        comments = Comment.objects.filter(course_id__slug=slug)
-        categories = Category.objects.all()
-        blogs = Blog.objects.all()
+class CommentFormView(FormView):
+    template_name = 'courses/course_detail.html'
+    form_class = CommentForm
 
-        context = {'course': course,
-                   'comments': comments,
-                   'categories': categories,
-                   'blogs': blogs, }
+    # success_url = '/thank-you/'
 
-        return render(request, 'courses/course_detail.html', context)
+    def form_valid(self, form):
+        # Process the form data (e.g., save to database)
+        # You can access form fields using form.cleaned_data
+        # Example: name = form.cleaned_data['name']
+        # Implement your logic here
 
-
-class CGDetailPage(View):
-    def get(self, request, slug):
-        category = Category.objects.get(slug=slug)
-        categories = Category.objects.all()
-        category_videos = Course.objects.filter(category=category)
-        blogs = Blog.objects.all()
-
-        context = {'category': category,
-                   'categories': categories,
-                   'category_videos': category_videos,
-                   'blogs': blogs, }
-
-        return render(request, 'courses/category_detail.html', context)
+        # Redirect to the success URL
+        return super().form_valid(form)
 
 
 class ContactPage(View):
