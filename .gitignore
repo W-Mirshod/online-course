@@ -106,7 +106,10 @@ env.bak/
 venv.bak/
 
 # some other ones
-media
+media/comments/
+media/images/
+media/videos/
+
 blogs/migrations
 courses/migrations
 teachers/migrations
