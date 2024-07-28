@@ -1,5 +1,8 @@
 from django.db import models
 
+from blogs.models import Author, Blog
+from teachers.models import Teacher
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -14,13 +17,16 @@ class Course(models.Model):
     number_of_students = models.IntegerField(default=0)
     price = models.FloatField()
     duration = models.IntegerField()
-    # teachers = models.ManyToManyField()
+    teachers = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     video = models.FileField(upload_to='media/courses')
     category = models.ForeignKey(Category, related_name='courses', on_delete=models.CASCADE, null=True, blank=True)
 
     @property
     def duration_of_video(self):
-        pass
+        if self.duration >= 60:
+            hours = self.duration // 60
+            minutes = self.duration % 60
+            return hours, minutes
 
     def __str__(self):
         return self.title
@@ -38,5 +44,8 @@ class Comment(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(null=True, blank=True)
     comment = models.TextField()
+    is_published = models.BooleanField(default=False)
     rating = models.CharField(max_length=100, choices=RatingChoices.choices, default=RatingChoices.Zero.value)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments')
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments')
+    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+    author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments')

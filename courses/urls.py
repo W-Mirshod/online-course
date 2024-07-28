@@ -1,3 +1,7 @@
 from django.urls import path
 
-urlpatterns = []
+from courses.views import IndexPage
+
+urlpatterns = [
+    path('', IndexPage.as_view(), name='index'),
+]
