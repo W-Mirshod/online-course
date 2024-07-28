@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.views import View
 
+from courses.models import Course
+
 
 class IndexPage(View):
     def get(self, request):
-        return render(request, 'index.html')
+        courses = Course.objects.all()
+        context = {'courses': courses}
+        return render(request, 'index.html', context)

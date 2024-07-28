@@ -5,10 +5,13 @@ from teachers.models import Teacher
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = "Categories"
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Course(models.Model):
@@ -27,6 +30,8 @@ class Course(models.Model):
             hours = self.duration // 60
             minutes = self.duration % 60
             return hours, minutes
+
+    objects = models.Manager
 
     def __str__(self):
         return self.title
