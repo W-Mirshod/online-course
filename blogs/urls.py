@@ -1,3 +1,7 @@
 from django.urls import path
 
-urlpatterns = []
+from blogs.views import BlogPage
+
+urlpatterns = [
+    path('', BlogPage.as_view(), name='blog'),
+]

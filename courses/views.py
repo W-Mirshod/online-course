@@ -18,6 +18,16 @@ class CoursePage(View):
         return render(request, 'course.html', context)
 
 
+class ContactPage(View):
+    def get(self, request):
+        return render(request, 'contact.html')
+
+
+class SinglePage(View):
+    def get(self, request):
+        return render(request, 'single.html')
+
+
 class AboutPage(View):
     def get(self, request):
         return render(request, 'about.html')
