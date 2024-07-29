@@ -24,11 +24,16 @@ class Course(models.Model):
     category = models.ForeignKey(Category, related_name='courses', on_delete=models.CASCADE, null=True, blank=True)
 
     @property
-    def duration_of_video(self):
+    def hours(self):
         if self.duration >= 60:
             hours = self.duration // 60
+            return hours
+
+    @property
+    def minutes(self):
+        if self.duration >= 60:
             minutes = self.duration % 60
-            return hours, minutes
+            return minutes
 
     objects = models.Manager
 
