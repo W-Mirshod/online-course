@@ -68,6 +68,7 @@ class AddComment(View):
             comment = Comment(name=name, email=email, rating=rating, comment=comment, course_id=course_id)
             if media_file:
                 comment.media_file = media_file
+                comment.save()
 
             comment.save()
 

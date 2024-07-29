@@ -47,3 +47,8 @@ class CommentForm(forms.Form):
     rating = forms.IntegerField(min_value=1, max_value=5)
     comment = forms.CharField(widget=forms.Textarea)
     media_file = forms.FileField(required=False)
+
+
+class GettingCoursesForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    courses = forms.ModelChoiceField(queryset=Course.objects.all())

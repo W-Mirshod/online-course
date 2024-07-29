@@ -122,3 +122,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class BoughtCourse(BaseModel):
+    name = models.CharField(max_length=50, blank=True, null=True)
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='bought_courses')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bought_courses')

@@ -1,13 +1,14 @@
-from django.contrib.auth import login, authenticate, logout
-from django.shortcuts import redirect, render
+import time
 from django.views import View
+from django.shortcuts import redirect, render
 from courses.forms import SignUpForm, LoginForm
+from django.contrib.auth import login, authenticate, logout
 
 
 class SignUpView(View):
     def get(self, request):
         form = SignUpForm()
-        return render(request, 'auth.html', {'form': form})
+        return render(request, 'others/auth.html', {'form': form})
 
     def post(self, request):
         form = SignUpForm(request.POST)
@@ -18,13 +19,13 @@ class SignUpView(View):
             login(request, user)
             return redirect('index')
 
-        return render(request, 'auth.html', {'form': form})
+        return render(request, 'others/auth.html', {'form': form})
 
 
 class LogInView(View):
     def get(self, request):
         form = LoginForm()
-        return render(request, 'auth.html', {'form': form, 'form_type': 'login'})
+        return render(request, 'others/auth.html', {'form': form, 'form_type': 'login'})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -39,7 +40,7 @@ class LogInView(View):
                 return redirect('index')
             else:
                 form.add_error(None, 'Invalid username or password.')
-        return render(request, 'auth.html', {'form': form, 'form_type': 'login'})
+        return render(request, 'others/auth.html', {'form': form, 'form_type': 'login'})
 
 
 class LogOutView(View):
@@ -47,4 +48,9 @@ class LogOutView(View):
         logout(request)
         if not request.user.is_authenticated:
             return redirect('index')
-        return render(request, 'auth.html')
+        return render(request, 'others/auth.html')
+
+
+def my_view(request):
+    time.sleep(2)
+    return render(request, 'others/loading.html')

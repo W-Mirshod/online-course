@@ -43,7 +43,7 @@
                         {% if comments %}
                             {% for comment in comments %}
                                 <div class="media mb-4">
-                                    <img src="{% static 'img/user.jpg' %}" alt="Image"
+                                    <img src="https://th.bing.com/th/id/OIP.70wRF8q-oXoh22mMWizblQHaHa?rs=1&pid=ImgDetMain" alt="Image"
                                          class="img-fluid rounded-circle mr-3 mt-1"
                                          style="width: 45px;">
                                     <div class="media-body">
@@ -58,6 +58,9 @@
                                             </form>
                                         {% endif %}
                                     </div>
+                                    {% if comment.media_file %}
+                                        <p>Uploaded file: <a href="{{ comment.media_file.url }}">Download</a></p>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}
