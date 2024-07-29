@@ -26,17 +26,18 @@
                         <div class="col-lg-3 col-md-4 mb-4">
                             <div class="card">
                                 <div class="card-body">
+                                
                                     {% if course.video %}
-                                        <video class="card-img-top" width="100%" controls>
+                                        <a href="{% url 'c_detail' course.slug %}"><video class="card-img-top" width="100%" controls>
                                             <source src="{{ course.video.url }}" type="video/mp4">
                                             Your browser does not support the video tag.
-                                        </video>
+                                        </video></a>
                                     {% else %}
                                         <img class="card-img-top" src="{% static 'img/carousel-1.jpg' %}" alt="Image">
                                     {% endif %}
                                     <h6 class="text-primary mt-3">Number of
                                         students: {{ course.number_of_students }}</h6>
-                                    <h5 class="card-title">{{ course.title }}</h5>
+                                    <a href="{% url 'c_detail' course.slug %}"><h5 class="card-title">{{ course.title }}</h5></a>
                                     <p class="card-text">
                                         {% if course.description %}
                                             {{ course.description }}
