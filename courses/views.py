@@ -7,7 +7,8 @@ from courses.models import Course
 class IndexPage(View):
     def get(self, request):
         courses = Course.objects.all()
-        context = {'courses': courses}
+        context = {'courses': courses,
+                   'active_page': 'active'}
         return render(request, 'index.html', context)
 
 
