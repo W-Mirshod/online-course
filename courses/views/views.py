@@ -55,7 +55,7 @@ class AddComment(View):
         return render(request, 'courses/course_detail.html', {'form': form, 'slug': slug})
 
     def post(self, request, slug):
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
             course_id = get_object_or_404(Course, slug=slug)
 
@@ -65,11 +65,12 @@ class AddComment(View):
             rating = form.cleaned_data['rating']
             media_file = form.cleaned_data['media_file']
 
-            comment = Comment(name=name, email=email, rating=rating, comment=comment, course_id=course_id)
             if media_file:
-                comment.media_file = media_file
-                comment.save()
+                comment = Comment(name=name, email=email, rating=rating, comment=comment, course_id=course_id,
+                                  media_file=media_file)
 
+            else:
+                comment = Comment(name=name, email=email, rating=rating, comment=comment, course_id=course_id)
             comment.save()
 
             return redirect('c_detail', slug=slug)

@@ -99,12 +99,15 @@ class Comment(BaseModel):
     name = models.CharField(max_length=50)
     email = models.EmailField(null=True, blank=True)
     comment = models.TextField()
-    media_file = models.FileField(upload_to='media/comments', blank=True, null=True)
+    media_file = models.FileField(upload_to='comments/', blank=True, null=True)
     is_published = models.BooleanField(default=True)
     rating = models.CharField(max_length=100, choices=RatingChoices.choices, default=RatingChoices.Zero.value)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
     blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
-    author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
+    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -128,3 +131,6 @@ class BoughtCourse(BaseModel):
     name = models.CharField(max_length=50, blank=True, null=True)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='bought_courses')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bought_courses')
+
+    def __str__(self):
+        return self.name

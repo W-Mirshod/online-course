@@ -12,11 +12,11 @@ class SignUpView(View):
 
     def post(self, request):
         form = SignUpForm(request.POST)
-        print(form.is_valid())
 
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            backend = 'django.contrib.auth.backends.ModelBackend'
+            login(request, user, backend=backend)
             return redirect('index')
 
         return render(request, 'others/auth.html', {'form': form})
@@ -36,7 +36,8 @@ class LogInView(View):
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user:
-                login(request, user)
+                backend = 'django.contrib.auth.backends.ModelBackend'
+                login(request, user, backend=backend)
                 return redirect('index')
             else:
                 form.add_error(None, 'Invalid username or password.')

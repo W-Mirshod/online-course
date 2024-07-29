@@ -1,9 +1,9 @@
+from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
 from courses.views.details import CourseDetailPage, CategoryDetailPage
-from courses.views.views import IndexPage, CoursesPage, ContactPage, AboutPage, BaseIndexPage, AddComment, DeleteComment
 from courses.views.authentication import SignUpView, LogInView, LogOutView
+from courses.views.views import IndexPage, CoursesPage, ContactPage, AboutPage, BaseIndexPage, AddComment, DeleteComment
 
 urlpatterns = [
                   # index

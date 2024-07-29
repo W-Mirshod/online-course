@@ -26,11 +26,23 @@ class BlogsPage(View):
 
 
 class SinglePage(View):
-    def get(self, request, slug):
-        category = None
-        if slug == '/blog/single/None':
-            category = Category.objects.get(slug=slug)
+    def get(self, request):
+        blog = Blog.objects.order_by('-created_at').first()
+        categories = Category.objects.all()
+        comments = Comment.objects.filter(blog_id__slug=blog.slug).order_by('-created_at')
+        num_of_categories = len(categories)
 
+        context = {'blog': blog,
+                   'categories': categories,
+                   'comments': comments,
+                   'num_of_categories': num_of_categories,
+                   'active_page': 'blog'}
+
+        return render(request, 'blogs/blog_detail.html', context)
+
+
+class BlogDetail(View):
+    def get(self, request, slug):
         blogs = Blog.objects.all()
         blog = Blog.objects.get(slug=slug)
         categories = Category.objects.all()
@@ -39,7 +51,6 @@ class SinglePage(View):
 
         context = {'blog': blog,
                    'blogs': blogs,
-                   'category': category,
                    'categories': categories,
                    'comments': comments,
                    'num_of_categories': num_of_categories,
@@ -54,7 +65,7 @@ class AddComment(View):
         return render(request, 'blogs/blog_detail.html', {'form': form, 'slug': slug})
 
     def post(self, request, slug):
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
             blog_id = get_object_or_404(Blog, slug=slug)
 
@@ -64,9 +75,11 @@ class AddComment(View):
             rating = form.cleaned_data['rating']
             media_file = form.cleaned_data['media_file']
 
-            comment = Comment(name=name, email=email, rating=rating, comment=comment, blog_id=blog_id)
             if media_file:
-                comment.media_file = media_file
+                comment = Comment(name=name, email=email, rating=rating, comment=comment, blog_id=blog_id,
+                                  media_file=media_file)
+            else:
+                comment = Comment(name=name, email=email, rating=rating, comment=comment, blog_id=blog_id)
 
             comment.save()
 

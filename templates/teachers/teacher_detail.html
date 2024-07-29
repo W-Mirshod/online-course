@@ -47,14 +47,25 @@
                         {% if comments %}
                             {% for comment in comments %}
                                 <div class="media mb-4">
-                                    <img src="{% static 'img/user.jpg' %}" alt="Image"
+                                    <img src="https://th.bing.com/th/id/OIP.70wRF8q-oXoh22mMWizblQHaHa?rs=1&pid=ImgDetMain"
+                                         alt="Image"
                                          class="img-fluid rounded-circle mr-3 mt-1"
                                          style="width: 45px;">
                                     <div class="media-body">
-                                        <h6>{{ comment.name }}<small><i>{{ comment.created_at }}</i></small></h6>
+                                        <h6>{{ comment.name }}<small> <i>{{ comment.created_at }}</i></small></h6>
                                         <p>{{ comment.comment }}</p>
-                                        <button class="btn btn-sm btn-secondary">Delete</button>
+                                        {% if user.is_superuser %}
+                                            <form method="get" action="{% url 'del_comment_blog' blog.slug %}">
+                                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                                <button class="btn btn-sm btn-secondary" type="submit">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        {% endif %}
                                     </div>
+                                    {% if comment.media_file %}
+                                        <p>Uploaded file: <a href="{{ comment.media_file.url }}">Download</a></p>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}
@@ -67,7 +78,7 @@
                     <!-- Comment Form -->
                     <div class="bg-secondary rounded p-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h3>
-                        <form method="post" action="{% url 'add_comment' course.slug %}">
+                        <form method="post" action="{% url 'add_comment_teacher' teacher.slug %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="name">Name *</label>
@@ -79,7 +90,23 @@
                             </div>
                             <div class="form-group">
                                 <label for="rating">Rating</label>
-                                <input type="text" name="rating" class="form-control border-0" id="rating">
+                                <select name="rating" class="form-control border-0" id="rating">
+                                    <option value="1"
+                                            {% if form.rating.value|stringformat:"s" == "1" %}selected{% endif %}>1
+                                    </option>
+                                    <option value="2"
+                                            {% if form.rating.value|stringformat:"s" == "2" %}selected{% endif %}>2
+                                    </option>
+                                    <option value="3"
+                                            {% if form.rating.value|stringformat:"s" == "3" %}selected{% endif %}>3
+                                    </option>
+                                    <option value="4"
+                                            {% if form.rating.value|stringformat:"s" == "4" %}selected{% endif %}>4
+                                    </option>
+                                    <option value="5"
+                                            {% if form.rating.value|stringformat:"s" == "5" %}selected{% endif %}>5
+                                    </option>
+                                </select>
                             </div>
                             <input type="hidden" name="course_id" value="{{ course.id }}">
                             <div class="form-group">
@@ -125,16 +152,17 @@
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
                         {% if blogs %}
                             {% for blog in blogs %}
-                                <a class="d-flex align-items-center text-decoration-none mb-3" href="{% url 'single' blog.slug %}">
-                                    {% if blog.image %}
-                                        <img class="img-fluid rounded" src="{% static blog.image.url %}" alt="">
-                                    {% else %}
-                                        <img class="img-fluid rounded" src="{% static 'img/blog-80x80.jpg' %}" alt="">
-                                    {% endif %}
-                                    <div class="pl-3">
-                                        <h6 class="m-1">{{ blog.title }}</h6>
-                                        <small>{{ blog.date_added }}</small>
-                                    </div>
+                                <a class="d-flex align-items-center text-decoration-none mb-3"
+                                   href="{% url 'single' blog.slug %}"">
+                                {% if blog.image %}
+                                    <img class="img-fluid rounded" src="{% static blog.image.url %}" alt="">
+                                {% else %}
+                                    <img class="img-fluid rounded" src="{% static 'img/blog-80x80.jpg' %}" alt="">
+                                {% endif %}
+                                <div class="pl-3">
+                                    <h6 class="m-1">{{ blog.title }}</h6>
+                                    <small>{{ blog.date_added }}</small>
+                                </div>
                                 </a>
                             {% endfor %}
                         {% else %}
