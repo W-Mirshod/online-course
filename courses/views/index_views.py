@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from courses.models import Course, Category
+from courses.models import Course, Category, Comment
 from teachers.models import Teacher
 
 
@@ -54,7 +54,10 @@ class SinglePage(View):
 
 class AboutPage(View):
     def get(self, request):
-        context = {'active_page': 'about'}
+        comments = Comment.objects.all()
+
+        context = {'comments': comments,
+                   'active_page': 'about'}
 
         return render(request, 'info/about.html', context)
 

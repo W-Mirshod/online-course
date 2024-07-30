@@ -50,33 +50,20 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="owl-carousel testimonial-carousel">
+                        {% if comments %}
+                        {% for comment in comments %}
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos.
-                                Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet
-                                eirmod eos labore diam</h4>
+                            <h4 class="font-weight-normal mb-4">{{ comment.comment }}</h4>
                             <img class="img-fluid mx-auto mb-3" src="{% static 'img/testimonial-1.jpg' %}" alt="">
-                            <h5 class="m-0">Client Name</h5>
+                            <h5 class="m-0">{{ comment.name }}</h5>
                             <span>Profession</span>
                         </div>
-                        <div class="text-center">
-                            <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos.
-                                Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet
-                                eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="{% static 'img/testimonial-2.jpg' %}" alt="">
-                            <h5 class="m-0">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                        <div class="text-center">
-                            <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos.
-                                Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet
-                                eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="{% static 'img/testimonial-3.jpg' %}" alt="">
-                            <h5 class="m-0">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
+                        {% endfor %}
+                        {% else %}
+                            <h3 style="color: darkred" class="text-center mb-5">Not Found Any Categories⁉️</h3>
+                            <h3 style="color: #0091c6" class="text-center mb-5">Add comments</h3>
+                        {% endif %}
                     </div>
                 </div>
             </div>
