@@ -13,13 +13,16 @@ from teachers.models import Teacher
 class IndexPage(View):
     def get(self, request):
         user = request.user
+        courses_for_purchase = None
+
         courses = Course.objects.annotate(average_rating=Avg('course_comments__rating'),
                                           counts_of_ratings=Sum('course_comments__rating')).order_by('-created_at')[:8]
         categories = Category.objects.order_by('-created_at')[:4]
         comments = Comment.objects.order_by('-created_at')[:5]
         teachers = Teacher.objects.order_by('-created_at')[:4]
         blogs = Blog.objects.order_by('-created_at')[:3]
-        courses_for_purchase = Course.objects.exclude(bought_courses__user=user)
+        if user.is_authenticated:
+            courses_for_purchase = Course.objects.exclude(bought_courses__user=user)
 
         context = {'categories': categories,
                    'teachers': teachers,
@@ -35,8 +38,11 @@ class IndexPage(View):
 class BaseIndexPage(View):
     def get(self, request):
         categories = Category.objects.annotate(course_count=Count('courses'))
+        courses = Course.objects.annotate(average_rating=Avg('course_comments__rating'),
+                                          counts_of_ratings=Sum('course_comments__rating'))
 
-        context = {'categories': categories, }
+        context = {'categories': categories,
+                   'courses': courses, }
 
         return render(request, 'base.html', context)
 

@@ -199,20 +199,26 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5 col-md-12 mb-5">
-            <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Student's Room</h5>
-            <a>Statics</a>
-            <p>Editing</p>
-            <a>All Courses</a>
-            <p>All Comments </p>
-            <div class="w-100">
-                <div class="input-group">
-                    <div class="input-group-append">
-                        <a href="{% url 'student_room' %}" class="btn btn-primary px-4">ENTER</a>
+        {% if user.is_authenticated %}
+            <div class="col-lg-5 col-md-12 mb-5">
+                <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Student's Room</h5>
+                <a>Statics</a>
+                <p>Editing</p>
+                <a>All Courses</a>
+                <p>All Comments </p>
+                <div class="w-100">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <a href="{% url 'student_room' %}" class="btn btn-primary px-4">ENTER</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Student's Room</h5>
+            <br>
+            <p>Register to open your own student room</p>
+        {% endif %}
     </div>
 </div>
 <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
