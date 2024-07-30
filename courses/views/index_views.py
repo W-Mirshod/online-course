@@ -15,7 +15,7 @@ class IndexPage(View):
                    'courses': courses,
                    'active_page': 'home'}
 
-        return render(request, 'index.html', context)
+        return render(request, 'courses/index.html', context)
 
 
 class BaseIndexPage(View):
@@ -35,28 +35,28 @@ class CoursesPage(View):
                    'courses': course,
                    'active_page': 'courses'}
 
-        return render(request, 'course.html', context)
+        return render(request, 'courses/course.html', context)
 
 
 class ContactPage(View):
     def get(self, request):
         context = {'active_page': 'contact'}
 
-        return render(request, 'contact.html', context)
+        return render(request, 'info/contact.html', context)
 
 
 class SinglePage(View):
     def get(self, request):
         context = {'active_page': 'blog'}
 
-        return render(request, 'single.html', context)
+        return render(request, 'blogs/single.html', context)
 
 
 class AboutPage(View):
     def get(self, request):
         context = {'active_page': 'about'}
 
-        return render(request, 'about.html', context)
+        return render(request, 'info/about.html', context)
 
 # from django.views.generic import TemplateView
 #

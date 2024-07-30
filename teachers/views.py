@@ -6,4 +6,4 @@ class TeachersPage(View):
     def get(self, request):
         context = {'active_page': 'teachers'}
 
-        return render(request, 'teacher.html', context)
+        return render(request, 'teachers/teacher.html', context)
