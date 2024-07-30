@@ -107,17 +107,17 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav py-0">
                         <a href="{% url 'index' %}" class="nav-item nav-link {% if active_page == 'home' %}active{% endif %}">Home</a>
-                        <a href="{% url 'about' %}" class="nav-item nav-link {% block about_active %}{% endblock %}">About</a>
-                        <a href="{% url 'course' %}" class="nav-item nav-link {% block course_active %}{% endblock %}">Courses</a>
-                        <a href="{% url 'teacher' %}" class="nav-item nav-link {% block teacher_active %}{% endblock %}">Teachers</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link {% if active_page == 'about' %}active{% endif %}">About</a>
+                        <a href="{% url 'course' %}" class="nav-item nav-link {% if active_page == 'courses' %}active{% endif %}">Courses</a>
+                        <a href="{% url 'teacher' %}" class="nav-item nav-link {% if active_page == 'teachers' %}active{% endif %}">Teachers</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
+                            <a href="{% url 'blog' %}" class="nav-link dropdown-toggle {% if active_page == 'blog' %}active{% endif %}" data-toggle="dropdown">Blog</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="{% url 'blog' %}" class="dropdown-item {% block blog_active %}{% endblock %}">Blog List</a>
-                                <a href="{% url 'single' %}" class="dropdown-item {% block single_active %}{% endblock %}">Blog Detail</a>
+                                <a href="{% url 'blog' %}" class="dropdown-item ">Blog List</a>
+                                <a href="{% url 'single' %}" class="dropdown-item ">Blog Detail</a>
                             </div>
                         </div>
-                        <a href="{% url 'contact' %}" class="nav-item nav-link {% block contact_active %}{% endblock %}">Contact</a>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link {% if active_page == 'contact' %}active{% endif %}">Contact</a>
                     </div>
                     <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{% url 'auth' %}">Join Now</a>
                 </div>
@@ -127,25 +127,7 @@
 </div>
 <!-- Navbar End -->
 
-{% block about %}
-{% endblock %}
-
-{% block blog %}
-{% endblock %}
-
-{% block contact %}
-{% endblock %}
-
-{% block course %}
-{% endblock %}
-
-{% block home %}
-{% endblock %}
-
-{% block single %}
-{% endblock %}
-
-{% block teacher %}
+{% block content %}
 {% endblock %}
 
 <!-- Footer Start -->
@@ -155,9 +137,9 @@
             <div class="row">
                 <div class="col-md-6 mb-5">
                     <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Get In Touch</h5>
-                    <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
-                    <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-                    <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Almazar, Tashkent, Uzbekistan</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i><a href="tel:+998907126437">+998 90 712 64 37</a></p>
+                    <p><i class="fa fa-envelope mr-2"></i><a href="mailto:trading3526@gmail.com">trading3526@gmail.com</a></p>
                     <div class="d-flex justify-content-start mt-4">
                         <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views import View
 
 
-class BlogPage(View):
+class BlogsPage(View):
     def get(self, request):
-        return render(request, 'blog.html')
+        context = {'active_page': 'blog'}
+
+        return render(request, 'blog.html', context)

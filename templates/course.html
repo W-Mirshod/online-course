@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block course %}
+{% block content %}
     <!-- Header Start -->
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
         <div class="container">
@@ -37,6 +37,19 @@
                             </div>
                         </div>
                     {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid py-5">
+            <div class="container pt-5 pb-3">
+                <div class="text-center mb-5">
+                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
+                    <h1>Explore Top Subjects</h1>
+                </div>
+                <div class="text-center">
+                    <br>
+                    <h3 style="color: darkred">Not Found Any Category⁉️</h3>
                 </div>
             </div>
         </div>
@@ -78,6 +91,19 @@
                         </div>
                     </div>
                 {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
+                    <h1>Our Popular Courses</h1>
+                </div>
+                <div class="text-center">
+                    <br>
+                    <h3 style="color: darkred">Not Found Any Courses⁉️</h3>
+                </div>
             </div>
         </div>
     {% endif %}

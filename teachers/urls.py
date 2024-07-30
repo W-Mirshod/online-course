@@ -1,6 +1,6 @@
 from django.urls import path
-from teachers.views import TeacherPage
+from teachers.views import TeachersPage
 
 urlpatterns = [
-    path('', TeacherPage.as_view(), name='teacher'),
+    path('', TeachersPage.as_view(), name='teacher'),
 ]
