@@ -7,6 +7,7 @@ from courses.models import Course, Category, Comment
 
 class CourseDetailPage(View):
     def get(self, request, slug):
+        print(slug)
         course = Course.objects.get(slug=slug)
         comments = Comment.objects.filter(course_id__slug=slug).order_by('-created_at')
         categories = Category.objects.annotate(course_count=Count('courses'))
@@ -25,8 +26,8 @@ class CategoryDetailPage(View):
         categories = Category.objects.annotate(course_count=Count('courses'))
         category = None
         if Category.objects.filter(slug=slug).exists():
-            category = Category.objects.filter(slug=slug).annotate(course_count=Count('courses'))
-        category_videos = Course.objects.filter(category=category)
+            category = Category.objects.filter(slug=slug)
+        category_videos = Course.objects.filter(category__in=category)
         blogs = Blog.objects.all()
 
         context = {'category': category,

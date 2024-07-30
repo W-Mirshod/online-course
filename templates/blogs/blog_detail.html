@@ -71,7 +71,6 @@
                                             <label for="5-stars-{{ comment.id }}"
                                                    class="star {% if comment.rating >= 5 %}active{% endif %}">&#9733;</label>
                                         </div>
-
                                         {% if comment.media_file %}
                                             {% if comment.media_file %}
                                                 <video class="card-img-top" width="640" style="height: auto;" controls>
@@ -89,6 +88,9 @@
                                             </form>
                                         {% endif %}
                                     </div>
+                                    {% if comment.media_file %}
+                                        <p>Uploaded file: <a href="{{ comment.media_file.url }}">Download</a></p>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}

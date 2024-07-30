@@ -84,7 +84,7 @@
                                             {% endif %}
                                         {% endif %}
                                         {% if user.is_superuser %}
-                                            <form method="get" action="{% url 'del_comment_teacher' teacher.slug %}">
+                                            <form method="get" action="{% url 'del_comment_blog' blog.slug %}">
                                                 <input type="hidden" name="comment_id" value="{{ comment.id }}">
                                                 <button class="btn btn-sm btn-secondary" type="submit">
                                                     Delete
