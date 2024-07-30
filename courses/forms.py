@@ -1,5 +1,5 @@
 from django import forms
-from courses.models import Course, Category, User, Comment, BoughtCourse
+from courses.models import Course, Category, User, Comment, BoughtCourse, ContactMessage
 from teachers.models import Teacher
 
 
@@ -64,3 +64,9 @@ class GettingCoursesForm(forms.ModelForm):
     class Meta:
         model = BoughtCourse
         fields = ('name', 'course_id',)
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'subject', 'message']

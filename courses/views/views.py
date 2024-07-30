@@ -2,10 +2,10 @@ from django.db.models import Count, Avg, Sum
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 
 from blogs.models import Blog
-from courses.forms import CommentForm, GettingCoursesForm
+from courses.forms import CommentForm, GettingCoursesForm, ContactForm
 from courses.models import Course, Category, Comment
 from teachers.models import Teacher
 
@@ -117,14 +117,26 @@ class GettingCourses(FormView):
         return context
 
 
-class ContactPage(View):
-    def get(self, request):
-        categories = Category.objects.annotate(course_count=Count('courses'))
+class ContactPage(TemplateView):
+    template_name = 'info/contact.html'
+    success_url = reverse_lazy('contact')
 
-        context = {'categories': categories,
-                   'active_page': 'contact'}
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.annotate(course_count=Count('courses'))
+        context['active_page'] = 'contact'
+        context['form'] = ContactForm()
+        context['result'] = False
+        return context
 
-        return render(request, 'info/contact.html', context)
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(self.success_url)
+        else:
+            context = self.get_context_data(form=form)
+            return self.render_to_response(context)
 
 
 class AboutPage(View):
@@ -137,3 +149,13 @@ class AboutPage(View):
                    'active_page': 'about'}
 
         return render(request, 'info/about.html', context)
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contact')
+    else:
+        form = ContactForm()
+    return render(request, 'info/contact.html', {'form': form})
