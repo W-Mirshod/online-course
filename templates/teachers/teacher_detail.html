@@ -23,21 +23,18 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="mb-5">
-                        <h6 class="text-primary mb-3">Number of students: {{ course.number_of_students }}</h6>
+                        <h6 class="text-primary mb-3">{{ teacher.full_name }}'s Level: {{ teacher.level }}</h6>
                         <h1 class="mb-5">{{ course.title }}</h1>
-                        {% if course.video %}
-                            <video width="640" height="360" controls>
-                                <source src="{{ course.video.url }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                        {% if teacher.image %}
+                            <img class="img-fluid" src="{{ teacher.image.url }}" alt="">
                         {% else %}
-                            <img class="img-fluid rounded w-100 mb-4" src="{% static 'img/carousel-1.jpg' %}"
+                            <img class="img-fluid rounded w-100 mb-4" src="{% static 'img/user.jpg' %}"
                                  alt="Image">
                         {% endif %}
-                        {% if course.description %}
-                            <p>{{ course.description }}</p>
+                        {% if teacher.description %}
+                            <h5>{{ teacher.description }}</h5>
                         {% else %}
-                            <p>{{ course.title }} has no description</p>
+                            <p>{{ teacher.full_name }} has no description</p>
                         {% endif %}
                     </div>
 

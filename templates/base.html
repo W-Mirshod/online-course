@@ -188,7 +188,7 @@
                     <div class="d-flex flex-column justify-content-start">
                         {% if categories %}
                             {% for category in categories %}
-                                <a class="text-white mb-2"><i class="fa fa-angle-right mr-2">
+                                <a class="text-white mb-2" href="{% url 'cg_detail' category.slug %}"><i class="fa fa-angle-right mr-2">
                                 </i>{{ category.title }}</a>
                             {% endfor %}
                         {% else %}
