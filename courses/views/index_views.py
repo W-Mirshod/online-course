@@ -18,6 +18,14 @@ class IndexPage(View):
         return render(request, 'index.html', context)
 
 
+class BaseIndexPage(View):
+    def get(self, request):
+        categories = Category.objects.all()
+        context = {'categories': categories, }
+
+        return render(request, 'base.html', context)
+
+
 class CoursesPage(View):
     def get(self, request):
         categories = Category.objects.all()
@@ -49,3 +57,14 @@ class AboutPage(View):
         context = {'active_page': 'about'}
 
         return render(request, 'about.html', context)
+
+# from django.views.generic import TemplateView
+#
+# class MyView(TemplateView):
+#     template_name = 'my_template.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['site_name'] = 'My Awesome Site'
+#         context['user_name'] = 'John Doe'
+#         return context

@@ -3,7 +3,6 @@ from django.db import models
 
 class Author(models.Model):
     full_name = models.CharField(max_length=100)
-    age = models.IntegerField(default=18)
     education = models.CharField(max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to='images/')
 
