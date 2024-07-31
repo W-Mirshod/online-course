@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'teachers.apps.TeachersConfig',
     'social_django',
+    'import_export',
 ]
 
 MIDDLEWARE = [
