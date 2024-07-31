@@ -41,9 +41,11 @@ class CoursesPage(View):
 class CDetailPage(View):
     def get(self, request, slug):
         course = Course.objects.get(slug=slug)
+        comments = Comment.objects.filter(course_id__slug=slug)
         categories = Category.objects.all()
 
         context = {'course': course,
+                   'comments': comments,
                    'categories': categories}
 
         return render(request, 'courses/detail.html', context)

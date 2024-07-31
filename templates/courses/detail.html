@@ -16,89 +16,51 @@
         </div>
     </div>
     <!-- Header End -->
-    
+
     <!-- Detail Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="mb-5">
-                        <h6 class="text-primary mb-3">Jan 01, 2050</h6>
-                        <h1 class="mb-5">Vero ipsum sea justo dolore eirmod amet dolor tempor lorem</h1>
-                        <img class="img-fluid rounded w-100 mb-4" src="{% static 'img/carousel-1.jpg' %}"
-                             alt="Image">
-                        <p>Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut magna lorem.
-                            Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet amet magna accusam
-                            consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at sanctus et. Ipsum sit
-                            gubergren dolores et, consetetur justo invidunt at et aliquyam ut et vero clita. Diam sea
-                            sea no sed dolores diam nonumy, gubergren sit stet no diam kasd vero.</p>
-                        <p>Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores vero stet
-                            consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit nonumy kasd diam dolores,
-                            sanctus lorem kasd duo dolor dolor vero sit et. Labore ipsum duo sanctus amet eos et.
-                            Consetetur no sed et aliquyam ipsum justo et, clita lorem sit vero amet amet est dolor
-                            elitr, stet et no diam sit. Dolor erat justo dolore sit invidunt.</p>
-                        <h2 class="mb-4">Est dolor lorem et ea</h2>
-                        <img class="img-fluid rounded w-50 float-left mr-4 mb-3" src="{% static 'img/blog-1.jpg' %}"
-                             alt="Image">
-                        <p>Diam dolor est labore duo invidunt ipsum clita et, sed et lorem voluptua tempor invidunt at
-                            est sanctus sanctus. Clita dolores sit kasd diam takimata justo diam lorem sed. Magna amet
-                            sed rebum eos. Clita no magna no dolor erat diam tempor rebum consetetur, sanctus labore sed
-                            nonumy diam lorem amet eirmod. No at tempor sea diam kasd, takimata ea nonumy elitr
-                            sadipscing gubergren erat. Gubergren at lorem invidunt sadipscing rebum sit amet ut ut,
-                            voluptua diam dolores at sadipscing stet. Clita dolor amet dolor ipsum vero ea ea eos.
-                            Invidunt sed diam dolores takimata dolor dolore dolore sit. Sit ipsum erat amet lorem et,
-                            magna sea at sed et eos. Accusam eirmod kasd lorem clita sanctus ut consetetur et. Et duo
-                            tempor sea kasd clita ipsum et. Takimata kasd diam justo est eos erat aliquyam et ut. Ea sed
-                            sadipscing no justo et eos labore, gubergren ipsum magna dolor lorem dolore, elitr aliquyam
-                            takimata sea kasd dolores diam, amet et est accusam labore eirmod vero et voluptua. Amet
-                            labore clita duo et no. Rebum voluptua magna eos magna, justo gubergren labore sit.</p>
-                        <p>Diam dolor est labore duo invidunt ipsum clita et, sed et lorem voluptua tempor invidunt at
-                            est sanctus sanctus. Clita dolores sit kasd diam takimata justo diam lorem sed. Magna amet
-                            sed rebum eos. Clita no magna no dolor erat diam tempor rebum consetetur, sanctus labore sed
-                            nonumy diam lorem amet eirmod. No at tempor sea diam kasd, takimata ea nonumy elitr
-                            sadipscing gubergren erat.</p>
+                        <h6 class="text-primary mb-3">Number of students: {{ course.number_of_students }}</h6>
+                        <h1 class="mb-5">{{ course.title }}</h1>
+                        {% if course.video %}
+                            <video width="640" height="360" controls>
+                                <source src="{{ course.video.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% else %}
+                            <img class="img-fluid rounded w-100 mb-4" src="{% static 'img/carousel-1.jpg' %}"
+                                 alt="Image">
+                        {% endif %}
+                        {% if course.description %}
+                            <p>{{ course.description }}</p>
+                        {% else %}
+                            <p>{{ course.title }} has no description</p>
+                        {% endif %}
                     </div>
 
                     <!-- Comment List -->
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">3 Comments</h3>
-                        <div class="media mb-4">
-                            <img src="{% static 'img/user.jpg' %}" alt="Image"
-                                 class="img-fluid rounded-circle mr-3 mt-1"
-                                 style="width: 45px;">
-                            <div class="media-body">
-                                <h6>John Doe <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-                                <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at.
-                                    Kasd diam tempor rebum magna dolores sed sed eirmod ipsum. Gubergren clita aliquyam
-                                    consetetur sadipscing, at tempor amet ipsum diam tempor consetetur at sit.</p>
-                                <button class="btn btn-sm btn-secondary">Reply</button>
-                            </div>
-                        </div>
-                        <div class="media mb-4">
-                            <img src="{% static 'img/user.jpg' %}" alt="Image"
-                                 class="img-fluid rounded-circle mr-3 mt-1"
-                                 style="width: 45px;">
-                            <div class="media-body">
-                                <h6>John Doe <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-                                <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at.
-                                    Kasd diam tempor rebum magna dolores sed sed eirmod ipsum. Gubergren clita aliquyam
-                                    consetetur sadipscing, at tempor amet ipsum diam tempor consetetur at sit.</p>
-                                <button class="btn btn-sm btn-secondary">Reply</button>
-                                <div class="media mt-4">
+                        {% if comments %}
+                            {% for comment in comments %}
+                                <div class="media mb-4">
                                     <img src="{% static 'img/user.jpg' %}" alt="Image"
                                          class="img-fluid rounded-circle mr-3 mt-1"
                                          style="width: 45px;">
                                     <div class="media-body">
-                                        <h6>John Doe <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum
-                                            et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.
-                                            Gubergren clita aliquyam consetetur, at tempor amet ipsum diam tempor at
-                                            sit.</p>
-                                        <button class="btn btn-sm btn-secondary">Reply</button>
+                                        <h6>{{ comment.name }}<small><i>{{ comment.written }}</i></small></h6>
+                                        <p>{{ comment.comment }}</p>
+                                        <button class="btn btn-sm btn-secondary">Delete</button>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            {% endfor %}
+                        {% else %}
+                            <h3 style="color: darkred">Not Found Any Category⁉️</h3>
+                        {% endif %}
+
                     </div>
 
                     <!-- Comment Form -->
@@ -215,5 +177,6 @@
     </div>
     <!-- Detail End -->
 {% endblock %}
+
 
 
