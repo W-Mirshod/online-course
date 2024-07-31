@@ -8,9 +8,20 @@
             <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
                 <h3 class="display-4 text-white text-uppercase">Teachers</h3>
                 <div class="d-inline-flex text-white">
-                    <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                    <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'index' %}">Home</a></p>
                     <i class="fa fa-angle-double-right pt-1 px-3"></i>
                     <p class="m-0 text-uppercase">Teachers</p>
+                </div>
+                <br>
+                <div class="mb-5" style="width: 300px;">
+                    <form class="d-flex" role="search">
+                        <input
+                                class="form-control me-2"
+                                type="search"
+                                placeholder="Search for something"
+                                name="search_query"
+                                required aria-label="   Search...">
+                    </form>
                 </div>
             </div>
         </div>
@@ -31,16 +42,19 @@
                             <div class="team-item rounded overflow-hidden mb-2">
                                 <div class="team-img position-relative">
                                     {% if teacher.image.url %}
-                                    <img class="img-fluid" src="{{ teacher.image.url }}" alt="">
+                                        <img class="img-fluid" src="{{ teacher.image.url }}" alt="">
                                     {% else %}
-                                    <img class="img-fluid" src="{% static 'img/no_image.jpg' %}" alt="">
+                                        <img class="img-fluid" src="{% static 'img/no_image.jpg' %}" alt="">
                                     {% endif %}
                                     <div class="team-social">
-                                        <a class="btn btn-outline-light btn-square mx-1" href="{{ teacher.twitter_link }}"><i
+                                        <a class="btn btn-outline-light btn-square mx-1"
+                                           href="{{ teacher.twitter_link }}"><i
                                                 class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-outline-light btn-square mx-1" href="{{ teacher.facebook_link }}"><i
+                                        <a class="btn btn-outline-light btn-square mx-1"
+                                           href="{{ teacher.facebook_link }}"><i
                                                 class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-outline-light btn-square mx-1" href="{{ teacher.linkedin_link }}"><i
+                                        <a class="btn btn-outline-light btn-square mx-1"
+                                           href="{{ teacher.linkedin_link }}"><i
                                                 class="fab fa-linkedin-in"></i></a>
                                     </div>
                                 </div>

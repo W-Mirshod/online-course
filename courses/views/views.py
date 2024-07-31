@@ -1,7 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.views.generic import FormView
-
 from blogs.models import Blog
 from courses.forms import CommentForm
 from courses.models import Course, Category, Comment
@@ -37,7 +35,12 @@ class BaseIndexPage(View):
 class CoursesPage(View):
     def get(self, request):
         categories = Category.objects.all()
-        course = Course.objects.all()
+        search = request.GET.get('search_query')
+
+        if search:
+            course = Course.objects.filter(title__icontains=search)
+        else:
+            course = Course.objects.all()
 
         context = {'categories': categories,
                    'courses': course,
