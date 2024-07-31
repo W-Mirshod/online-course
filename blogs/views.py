@@ -19,11 +19,16 @@ class BlogsPage(View):
 
 
 class SinglePage(View):
-    def get(self, request):
+    def get(self, request, slug):
+        category = None
+        print(slug)
+        if slug == '/blog/single/None':
+            category = Category.objects.get(slug=slug)
         categories = Category.objects.all()
         num_of_categories = len(categories)
 
-        context = {'categories': categories,
+        context = {'category': category,
+                   'categories': categories,
                    'num_of_categories': num_of_categories,
                    'active_page': 'blog'}
 

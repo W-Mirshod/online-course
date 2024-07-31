@@ -277,7 +277,7 @@
                         <div class="col-lg-4 mb-4">
                             <div class="blog-item position-relative overflow-hidden rounded mb-2">
                                 <img class="img-fluid" src="{% static 'img/blog-1.jpg' %}" alt="">
-                                <a class="blog-overlay text-decoration-none" href="">
+                                <a class="blog-overlay text-decoration-none" href="{% url 'single' blog.slug %}">
                                     <h5 class="text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita
                                         at ut
                                         clita</h5>
@@ -292,7 +292,7 @@
                             <img class="img-fluid"
                                  src="https://webgatha.potenzaglobalsolutions.com/wp-content/themes/webgatha-child/intro/assets/images/loading.gif"
                                  alt="">
-                            <a class="blog-overlay text-decoration-none" href="">
+                            <a class="blog-overlay text-decoration-none" href="{% url 'blog' %}">
                                 <h5 style="color: darkred" class="text-white mb-3">Not Found Any Blogs⁉️</h5>
                                 <p>Write Some Blogs</p>
                             </a>
@@ -303,5 +303,52 @@
         </div>
     </div>
     <!-- Blog End -->
+    {% if user.is_authenticated %}
+    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <div class="mb-4">
+                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Need Any Courses</h5>
+                    <h1 class="text-white">30% Off For New Students</h1>
+                </div>
+                <p class="text-white">What We offer:</p>
+                <ul class="list-inline text-white m-0">
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Courses</li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Categories</li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Teachers</li>
+                </ul>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0">
+                    <div class="card-header bg-light text-center p-4">
+                        <h1 class="m-0">Buy Courses Now</h1>
+                    </div>
+                    <div class="card-body rounded-bottom bg-primary p-5">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 p-4" placeholder="Your name"
+                                       required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <select class="custom-select border-0 px-4" style="height: 47px;">
+                                    <option selected>Select a course</option>
+                                    <option value="1">Course 1</option>
+                                    <option value="2">Course 1</option>
+                                    <option value="3">Course 1</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endif %}
+
 
 {% endblock %}
