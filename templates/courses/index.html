@@ -281,12 +281,15 @@
                     {% for blog in blogs %}
                         <div class="col-lg-4 mb-4">
                             <div class="blog-item position-relative overflow-hidden rounded mb-2">
-                                <img class="img-fluid" src="{% static 'img/blog-1.jpg' %}" alt="">
+                                {% if blog.image %}
+                                        <img class="img-fluid" src="{{ blog.image.url }}" alt="">
+                                    {% else %}
+                                        <img class="img-fluid" src="{% static 'img/blog-1.jpg' %}" alt="">
+                                    {% endif %}
                                 <a class="blog-overlay text-decoration-none" href="{% url 'single' blog.slug %}">
-                                    <h5 class="text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita
-                                        at ut
-                                        clita</h5>
-                                    <p class="text-primary m-0">Jan 01, 2050</p>
+                                    <h4 class="text-white mb-3">{{ blog.title }}</h4>
+                                    <h6 class="text-white mb-3">{{ blog.content }}</h6>
+                                    <p class="text-primary m-0">{{ blog.updated_at }}</p>
                                 </a>
                             </div>
                         </div>

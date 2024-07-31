@@ -58,13 +58,16 @@ class AddComment(View):
             email = form.cleaned_data['email']
             comment = form.cleaned_data['comment']
             rating = form.cleaned_data['rating']
+            media_file = form.cleaned_data['media_file']
 
             comment = Comment(name=name, email=email, rating=rating, comment=comment, course_id=course_id)
+            if media_file:
+                comment.media_file = media_file
+
             comment.save()
 
             return redirect('c_detail', slug=slug)
         return redirect('c_detail', slug=slug)
-
 
 
 class ContactPage(View):
@@ -87,14 +90,3 @@ class AboutPage(View):
                    'active_page': 'about'}
 
         return render(request, 'info/about.html', context)
-
-# from django.views.generic import TemplateView
-#
-# class MyView(TemplateView):
-#     template_name = 'my_template.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['site_name'] = 'My Awesome Site'
-#         context['user_name'] = 'John Doe'
-#         return context

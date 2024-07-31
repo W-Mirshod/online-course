@@ -100,6 +100,7 @@ class Comment(BaseModel):
     name = models.CharField(max_length=50)
     email = models.EmailField(null=True, blank=True)
     comment = models.TextField()
+    media_file = models.FileField(upload_to='media/comments', blank=True, null=True)
     is_published = models.BooleanField(default=True)
     rating = models.CharField(max_length=100, choices=RatingChoices.choices, default=RatingChoices.Zero.value)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)

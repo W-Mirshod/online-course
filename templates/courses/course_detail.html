@@ -55,11 +55,14 @@
                                         <p>{{ comment.comment }}</p>
                                         <button class="btn btn-sm btn-secondary">Delete</button>
                                     </div>
+                                    {% if comment.media_file %}
+                                        <p>Uploaded file: <a href="{{ comment.media_file.url }}">Download</a></p>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}
                             <h5 style="color: darkred">Not Found Any Comments⁉️</h5>
-                            <p>You can add an comment</p>
+                            <p>You can add a comment</p>
                         {% endif %}
 
                     </div>
@@ -86,6 +89,10 @@
                                 <label for="comment">Message *</label>
                                 <textarea id="comment" name="comment" cols="30" rows="5"
                                           class="form-control border-0"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="media_file">Upload File</label>
+                                <input type="file" name="media_file" class="form-control border-0" id="file">
                             </div>
                             <div class="form-group mb-0">
                                 <button class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold"
