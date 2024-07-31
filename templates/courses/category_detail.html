@@ -68,25 +68,25 @@
 
                 <!-- Recent Post -->
                 <div class="mb-5">
-                    <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
-                    {% if blogs %}
-                        {% for blog in blogs %}
-                            <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                                {% if blog.image %}
-                                    <img class="img-fluid rounded" src="{% static blog.image.url %}" alt="">
-                                {% else %}
-                                    <img class="img-fluid rounded" src="{% static 'img/blog-80x80.jpg' %}" alt="">
-                                {% endif %}
-                                <div class="pl-3">
-                                    <h6 class="m-1">{{ blog.title }}</h6>
-                                    <small>{{ blog.date_added }}</small>
-                                </div>
-                            </a>
-                        {% endfor %}
-                    {% else %}
-                        <a style="color: darkred">Not Found Any Blog Posts⁉️</a>
-                    {% endif %}
-                </div>
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
+                        {% if blogs %}
+                            {% for blog in blogs %}
+                                <a class="d-flex align-items-center text-decoration-none mb-3" href="{% url 'single' blog.slug %}">
+                                    {% if blog.image %}
+                                        <img class="img-fluid rounded" src="{% static blog.image.url %}" alt="">
+                                    {% else %}
+                                        <img class="img-fluid rounded" src="{% static 'img/blog-80x80.jpg' %}" alt="">
+                                    {% endif %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">{{ blog.title }}</h6>
+                                        <small>{{ blog.date_added }}</small>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <a style="color: darkred">Not Found Any Blog Posts⁉️</a>
+                        {% endif %}
+                    </div>
 
                 <!-- Tag Cloud -->
                 <div class="mb-5">

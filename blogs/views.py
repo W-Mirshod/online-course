@@ -26,12 +26,14 @@ class SinglePage(View):
         if slug == '/blog/single/None':
             category = Category.objects.get(slug=slug)
 
+        blogs = Blog.objects.all()
         blog = Blog.objects.get(slug=slug)
         categories = Category.objects.all()
-        comments = Comment.objects.filter(blog_id__slug=slug)
+        comments = Comment.objects.filter(blog_id__slug=slug).order_by('-created_at')
         num_of_categories = len(categories)
 
         context = {'blog': blog,
+                   'blogs': blogs,
                    'category': category,
                    'categories': categories,
                    'comments': comments,
@@ -64,4 +66,12 @@ class AddComment(View):
             comment.save()
 
             return redirect('single', slug=slug)
+        return redirect('single', slug=slug)
+
+
+class DeleteComment(View):
+    def get(self, request, slug):
+        comment_id = request.GET.get('comment_id')
+        comment = get_object_or_404(Comment, id=comment_id)
+        comment.delete()
         return redirect('single', slug=slug)

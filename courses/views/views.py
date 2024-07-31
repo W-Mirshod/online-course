@@ -11,12 +11,14 @@ from teachers.models import Teacher
 class IndexPage(View):
     def get(self, request):
         categories = Category.objects.order_by('-created_at')[:4]
+        comments = Comment.objects.order_by('-created_at')[:5]
         teachers = Teacher.objects.order_by('-created_at')[:4]
         courses = Course.objects.order_by('-created_at')[:8]
         blogs = Blog.objects.order_by('-created_at')[:3]
 
         context = {'categories': categories,
                    'teachers': teachers,
+                   'comments': comments,
                    'courses': courses,
                    'blogs': blogs,
                    'active_page': 'home'}
@@ -82,7 +84,7 @@ class ContactPage(View):
 
 class AboutPage(View):
     def get(self, request):
-        comments = Comment.objects.all()
+        comments = Comment.objects.order_by('-created_at')[:5]
         categories = Category.objects.all()
 
         context = {'comments': comments,

@@ -125,7 +125,7 @@
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
                         {% if blogs %}
                             {% for blog in blogs %}
-                                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                                <a class="d-flex align-items-center text-decoration-none mb-3" href="{% url 'single' blog.slug %}">
                                     {% if blog.image %}
                                         <img class="img-fluid rounded" src="{% static blog.image.url %}" alt="">
                                     {% else %}

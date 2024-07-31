@@ -108,6 +108,7 @@ class Comment(BaseModel):
     author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
 
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(unique=True, max_length=50)
     birth_of_date = models.DateField(null=True, blank=True)
