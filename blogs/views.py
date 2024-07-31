@@ -22,7 +22,6 @@ class BlogsPage(View):
 class SinglePage(View):
     def get(self, request, slug):
         category = None
-        print(slug)
         if slug == '/blog/single/None':
             category = Category.objects.get(slug=slug)
 

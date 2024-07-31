@@ -4,10 +4,10 @@ from blogs.models import Blog
 from courses.models import Course, Category, Comment
 
 
-class CDetailPage(View):
+class CourseDetailPage(View):
     def get(self, request, slug):
         course = Course.objects.get(slug=slug)
-        comments = Comment.objects.filter(course_id__slug=slug)
+        comments = Comment.objects.filter(course_id__slug=slug).order_by('-created_at')
         categories = Category.objects.all()
         blogs = Blog.objects.all()
 
@@ -19,7 +19,7 @@ class CDetailPage(View):
         return render(request, 'courses/course_detail.html', context)
 
 
-class CGDetailPage(View):
+class CategoryDetailPage(View):
     def get(self, request, slug):
         category = Category.objects.get(slug=slug)
         categories = Category.objects.all()

@@ -53,7 +53,14 @@
                                     <div class="media-body">
                                         <h6>{{ comment.name }}<small><i>{{ comment.created_at }}</i></small></h6>
                                         <p>{{ comment.comment }}</p>
-                                        <button class="btn btn-sm btn-secondary">Delete</button>
+                                        {% if user.is_superuser %}
+                                            <form method="get" action="{% url 'del_comment_course' course.slug %}">
+                                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                                <button class="btn btn-sm btn-secondary" type="submit">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        {% endif %}
                                     </div>
                                     {% if comment.media_file %}
                                         <p>Uploaded file: <a href="{{ comment.media_file.url }}">Download</a></p>

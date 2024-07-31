@@ -72,6 +72,14 @@ class AddComment(View):
         return redirect('c_detail', slug=slug)
 
 
+class DeleteComment(View):
+    def get(self, request, slug):
+        comment_id = request.GET.get('comment_id')
+        comment = get_object_or_404(Comment, id=comment_id)
+        comment.delete()
+        return redirect('c_detail', slug=slug)
+
+
 class ContactPage(View):
     def get(self, request):
         categories = Category.objects.all()
