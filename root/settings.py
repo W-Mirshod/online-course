@@ -109,8 +109,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -154,12 +154,12 @@ SOCIAL_AUTH_PIPELINE = (
 JAZZMIN_SETTINGS = {
     'site_title': 'Online Course',
     'site_header': 'E-Platform',
-    'site_brand': 'WWW',
-    'site_logo': 'https://media.emailonacid.com/wp-content/uploads/2018/06/HC-GettingStarted.png',
+    'site_brand': 'E-Courses',
+    'site_logo': 'admin.ico',
     'welcome_sign': 'Welcome to the Admin Area',
     'copyright': 'Najot Ta\'lim',
     'search_model': 'auth.User',
-    'user_avatar': 'https://media.emailonacid.com/wp-content/uploads/2018/06/HC-GettingStarted.png',
+    'user_avatar': 'admin.ico',
 
     # Top Menu #
     'topmenu_links': [
@@ -169,7 +169,6 @@ JAZZMIN_SETTINGS = {
 
     # Side Menu #
     'show_sidebar': True,
-
     'navigation_expanded': True,
 
     'icons': {
@@ -183,4 +182,40 @@ JAZZMIN_SETTINGS = {
     'custom_js': 'js/admin_custom.js',
 
     'show_ui_builder': True,
+
+    # Theme settings
+    'theme': 'darkly',  # Apply the dark theme by default
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-primary",
+    "accent": "accent-pink",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-success",
+    "sidebar_nav_small_text": True,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "darkly",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-outline-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-outline-success"
+    },
+    "actions_sticky_top": False
 }

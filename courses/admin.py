@@ -5,7 +5,7 @@ from courses.models import Course, Category, Comment, User
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    fields = ['title', 'image', 'created_at']
+    fields = ['title', 'image']
     list_display = ['title']
     search_fields = ['title']
     list_filter = ['title']
@@ -14,7 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     fields = ['title', 'description', 'number_of_students', 'price',
-              'duration', 'teachers', 'category', 'video', 'image']
+              'duration', 'teachers', 'category', 'video']
     list_display = ('title', 'slug', 'number_of_students', 'price')
     search_fields = ('title', 'teachers')
     list_filter = ('duration', 'price')
