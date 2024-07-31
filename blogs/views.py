@@ -27,4 +27,4 @@ class SinglePage(View):
                    'num_of_categories': num_of_categories,
                    'active_page': 'blog'}
 
-        return render(request, 'blogs/detail.html', context)
+        return render(request, 'blogs/blog_detail.html', context)

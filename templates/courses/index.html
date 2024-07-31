@@ -78,7 +78,7 @@
 
 
     <!-- Category Start -->
-    {% if categories %}
+    {% if blogs %}
         <div class="container-fluid py-5">
             <div class="container pt-5 pb-3">
                 <div class="text-center mb-5">
@@ -86,17 +86,17 @@
                     <h1>Explore Top Subjects</h1>
                 </div>
                 <div class="row">
-                    {% for category in categories %}
+                    {% for blog in blogs %}
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                                {% if category.image %}
-                                    <img class="img-fluid" src="{{ category.image.url }}" alt="">
+                                {% if blog.image %}
+                                    <img class="img-fluid" src="{{ blog.image.url }}" alt="">
                                 {% else %}
                                     <img class="img-fluid" src="{% static 'img/cat-1.jpg' %}" alt="">
                                 {% endif %}
                                 <a class="cat-overlay text-white text-decoration-none" href="">
                                     <h4 class="text-white font-weight-medium"></h4>
-                                    <span>{{ category.title }}</span>
+                                    <span>{{ blog.title }}</span>
                                 </a>
                             </div>
                         </div>
@@ -272,8 +272,8 @@
                 <h1>Latest From Our Blog</h1>
             </div>
             <div class="row pb-3">
-                {% if categories %}
-                    {% for category in categories %}
+                {% if blogs %}
+                    {% for blog in blogs %}
                         <div class="col-lg-4 mb-4">
                             <div class="blog-item position-relative overflow-hidden rounded mb-2">
                                 <img class="img-fluid" src="{% static 'img/blog-1.jpg' %}" alt="">

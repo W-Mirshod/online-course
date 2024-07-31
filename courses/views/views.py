@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from blogs.models import Blog
 from courses.models import Course, Category, Comment
 from teachers.models import Teacher
 
@@ -9,10 +10,12 @@ class IndexPage(View):
         categories = Category.objects.all()
         teachers = Teacher.objects.all()
         courses = Course.objects.all()
+        blogs = Blog.objects.all()
 
         context = {'categories': categories,
                    'teachers': teachers,
                    'courses': courses,
+                   'blogs': blogs,
                    'active_page': 'home'}
 
         return render(request, 'courses/index.html', context)
@@ -43,12 +46,27 @@ class CDetailPage(View):
         course = Course.objects.get(slug=slug)
         comments = Comment.objects.filter(course_id__slug=slug)
         categories = Category.objects.all()
+        blogs = Blog.objects.all()
 
         context = {'course': course,
                    'comments': comments,
-                   'categories': categories}
+                   'categories': categories,
+                   'blogs': blogs, }
 
-        return render(request, 'courses/detail.html', context)
+        return render(request, 'courses/course_detail.html', context)
+
+
+class CGDetailPage(View):
+    def get(self, request, slug):
+        category = Category.objects.get(slug=slug)
+        categories = Category.objects.all()
+        blogs = Blog.objects.all()
+
+        context = {'category': category,
+                   'categories': categories,
+                   'blogs': blogs, }
+
+        return render(request, 'courses/category_detail.html', context)
 
 
 class ContactPage(View):

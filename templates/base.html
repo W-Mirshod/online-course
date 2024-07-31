@@ -88,7 +88,7 @@
                 <div class="navbar-nav w-100">
                     {% if categories %}
                         {% for category in categories %}
-                            <a href="" class="nav-item nav-link">{{ category.title }}</a>
+                            <a href="{% url 'cg_detail' category.slug %}" class="nav-item nav-link">{{ category.title }}</a>
                         {% endfor %}
                     {% else %}
                         <a class="nav-item nav-link">Not Found Any Categories⁉️</a>

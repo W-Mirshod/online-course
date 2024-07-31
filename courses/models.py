@@ -7,10 +7,26 @@ from teachers.models import Teacher
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     image = models.ImageField(upload_to='images/categories', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Categories"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        if self.slug:
+            i = 1
+            while True:
+                new_slug = f"{slugify(self.title)}-{i}"
+                if not Category.objects.filter(slug=new_slug).exists():
+                    self.slug = new_slug
+                    break
+                i += 1
+
+        super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
