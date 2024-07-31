@@ -19,93 +19,41 @@
 
     <!-- Detail Start -->
     <div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-8">
+        <div class="container py-5">
+            <div class="row">
                 {% if category_videos %}
                     {% for course in category_videos %}
-                        <div class="mb-5">
-                            <h6 class="text-primary mb-3">Number of students: {{ course.number_of_students }}</h6>
-                            <h1 class="mb-5">{{ course.title }}</h1>
-                            {% if course.video %}
-                                <video width="640" height="360" controls>
-                                    <source src="{{ course.video.url }}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            {% else %}
-                                <img class="img-fluid rounded w-100 mb-4" src="{% static 'img/carousel-1.jpg' %}"
-                                     alt="Image">
-                            {% endif %}
-                            {% if course.description %}
-                                <p>{{ course.description }}</p>
-                            {% else %}
-                                <p>{{ course.title }} has no description</p>
-                            {% endif %}
+                        <div class="col-lg-3 col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if course.video %}
+                                        <video class="card-img-top" width="100%" controls>
+                                            <source src="{{ course.video.url }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    {% else %}
+                                        <img class="card-img-top" src="{% static 'img/carousel-1.jpg' %}" alt="Image">
+                                    {% endif %}
+                                    <h6 class="text-primary mt-3">Number of
+                                        students: {{ course.number_of_students }}</h6>
+                                    <h5 class="card-title">{{ course.title }}</h5>
+                                    <p class="card-text">
+                                        {% if course.description %}
+                                            {{ course.description }}
+                                        {% else %}
+                                            {{ course.title }} has no description
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     {% endfor %}
                 {% else %}
-                    <h2 style="color: darkred">Not Found Any Videos In This Category⁉️</h2>
+                    <h2 class="col-12 text-center" style="color: darkred;">Not Found Any Videos In This Category⁉️</h2>
                 {% endif %}
-            </div>
-            <div class="col-lg-4 mt-5 mt-lg-0">
-                <!-- Category List -->
-                <div class="mb-5">
-                    <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h3>
-                    <ul class="list-group list-group-flush">
-                        {% if categories %}
-                            {% for category in categories %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{% url 'cg_detail' category.slug %}"
-                                       class="text-decoration-none h6 m-0">{{ category.title }}</a>
-                                    <span class="badge badge-primary badge-pill">1</span>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            <a style="color: darkred">Not Found Any Categories⁉️</a>
-                        {% endif %}
-                    </ul>
-                </div>
-
-                <!-- Recent Post -->
-                <div class="mb-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
-                        {% if blogs %}
-                            {% for blog in blogs %}
-                                <a class="d-flex align-items-center text-decoration-none mb-3" href="{% url 'single' blog.slug %}">
-                                    {% if blog.image %}
-                                        <img class="img-fluid rounded" src="{% static blog.image.url %}" alt="">
-                                    {% else %}
-                                        <img class="img-fluid rounded" src="{% static 'img/blog-80x80.jpg' %}" alt="">
-                                    {% endif %}
-                                    <div class="pl-3">
-                                        <h6 class="m-1">{{ blog.title }}</h6>
-                                        <small>{{ blog.date_added }}</small>
-                                    </div>
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <a style="color: darkred">Not Found Any Blog Posts⁉️</a>
-                        {% endif %}
-                    </div>
-
-                <!-- Tag Cloud -->
-                <div class="mb-5">
-                    <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                    <div class="d-flex flex-wrap m-n1">
-                        {% if categories %}
-                            {% for category in categories %}
-                                <a href="{% url 'cg_detail' category.slug %}"
-                                   class="btn btn-outline-primary m-1">{{ category.title }}</a>
-                            {% endfor %}
-                        {% else %}
-                            <a style="color: darkred">Not Found Any Category Tags⁉️</a>
-                        {% endif %}
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-    <!-- Detail End -->
 {% endblock %}
 
 

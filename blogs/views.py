@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from blogs.forms import CommentForm
@@ -10,6 +11,11 @@ class BlogsPage(View):
         blogs = Blog.objects.all()
         categories = Category.objects.all()
         num_of_categories = len(categories)
+
+        paginator = Paginator(blogs, 2)
+
+        page_number = request.GET.get('page')
+        blogs = paginator.get_page(page_number)
 
         context = {'blogs': blogs,
                    'categories': categories,

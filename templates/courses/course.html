@@ -73,14 +73,12 @@
                     {% for course in courses %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
-                                {% if course.image %}
-                                    <a href="{% url 'c_detail' course.slug %}"><img class=" img-fluid" src="
-                                    {{ course.image.url }}" alt=""></a>
-                                {% else %}
-                                    <a href="{% url 'c_detail' course.slug %}">
-                                        <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
-                                    </a>
-                                {% endif %}
+                                <a href="{% url 'c_detail' course.slug %}">
+                                    <video width="460" height="280">
+                                        <source src="{{ course.video.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </a>
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
                                         <small class="m-0"><i

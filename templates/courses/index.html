@@ -133,14 +133,12 @@
                     {% for course in courses %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
-                                {% if course.image %}
-                                    <a href="{% url 'c_detail' course.slug %}"><img class=" img-fluid" src="
-                                    {{ course.image.url }}" alt=""></a>
-                                {% else %}
-                                    <a href="{% url 'c_detail' course.slug %}">
-                                        <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
-                                    </a>
-                                {% endif %}
+                                <a href="{% url 'c_detail' course.slug %}">
+                                    <video width="480" height="240">
+                                        <source src="{{ course.video.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </a>
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
                                         <small class="m-0"><i
@@ -282,10 +280,10 @@
                         <div class="col-lg-4 mb-4">
                             <div class="blog-item position-relative overflow-hidden rounded mb-2">
                                 {% if blog.image %}
-                                        <img class="img-fluid" src="{{ blog.image.url }}" alt="">
-                                    {% else %}
-                                        <img class="img-fluid" src="{% static 'img/blog-1.jpg' %}" alt="">
-                                    {% endif %}
+                                    <img class="img-fluid" src="{{ blog.image.url }}" alt="">
+                                {% else %}
+                                    <img class="img-fluid" src="{% static 'img/blog-1.jpg' %}" alt="">
+                                {% endif %}
                                 <a class="blog-overlay text-decoration-none" href="{% url 'single' blog.slug %}">
                                     <h4 class="text-white mb-3">{{ blog.title }}</h4>
                                     <h6 class="text-white mb-3">{{ blog.content }}</h6>

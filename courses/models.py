@@ -51,7 +51,6 @@ class Course(BaseModel):
     price = models.FloatField()
     duration = models.PositiveIntegerField()
     teachers = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/courses', null=True, blank=True)
     video = models.FileField(upload_to='videos/courses')
     category = models.ForeignKey(Category, related_name='courses', on_delete=models.CASCADE, null=True, blank=True)
 
@@ -106,7 +105,6 @@ class Comment(BaseModel):
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
     blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
     author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
-
 
 
 class User(AbstractBaseUser, PermissionsMixin):

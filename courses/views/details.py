@@ -21,7 +21,9 @@ class CourseDetailPage(View):
 
 class CategoryDetailPage(View):
     def get(self, request, slug):
-        category = Category.objects.get(slug=slug)
+        category = None
+        if Category.objects.filter(slug=slug).exists():
+            category = Category.objects.get(slug=slug)
         categories = Category.objects.all()
         category_videos = Course.objects.filter(category=category)
         blogs = Blog.objects.all()
