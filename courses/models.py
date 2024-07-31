@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.text import slugify
+
 from blogs.models import Author, Blog
 from teachers.models import Teacher
 
@@ -15,6 +17,7 @@ class Category(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     description = models.TextField(null=True, blank=True)
     number_of_students = models.IntegerField(default=0)
     price = models.FloatField()
@@ -36,6 +39,21 @@ class Course(models.Model):
             return minutes
 
     objects = models.Manager
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        if self.slug:
+            i = 1
+            while True:
+                new_slug = f"{slugify(self.title)}-{i}"
+                if not Course.objects.filter(slug=new_slug).exists():
+                    self.slug = new_slug
+                    break
+                i += 1
+
+        super(Course, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

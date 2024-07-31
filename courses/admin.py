@@ -12,6 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'number_of_students', 'price')
+    fields = ['title', 'description', 'number_of_students', 'price', 'duration', 'teachers', 'category', 'video']
+    list_display = ('title', 'slug', 'number_of_students', 'price')
     search_fields = ('title', 'teachers')
     list_filter = ('duration', 'price')

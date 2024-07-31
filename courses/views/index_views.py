@@ -45,13 +45,6 @@ class ContactPage(View):
         return render(request, 'info/contact.html', context)
 
 
-class SinglePage(View):
-    def get(self, request):
-        context = {'active_page': 'blog'}
-
-        return render(request, 'blogs/single.html', context)
-
-
 class AboutPage(View):
     def get(self, request):
         comments = Comment.objects.all()

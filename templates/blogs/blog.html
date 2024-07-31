@@ -64,17 +64,6 @@
                 </div>
 
                 <div class="col-lg-4 mt-5 mt-lg-0">
-                    <!-- Author Bio -->
-                    <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        <img src="#" class="img-fluid rounded-circle mx-auto mb-3"
-                             style="width: 100px;">
-                        <h3 class="text-primary mb-3">John Doe</h3>
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit
-                            no
-                            ut est ipsum erat kasd amet elitr</p>
-                    </div>
-
                     <!-- Search Form -->
                     <div class="mb-5">
                         <form action="">
@@ -92,26 +81,16 @@
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h3>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Design</a>
-                                <span class="badge badge-primary badge-pill">150</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Development</a>
-                                <span class="badge badge-primary badge-pill">131</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Online Marketing</a>
-                                <span class="badge badge-primary badge-pill">78</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Keyword Research</a>
-                                <span class="badge badge-primary badge-pill">56</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Email Marketing</a>
-                                <span class="badge badge-primary badge-pill">98</span>
-                            </li>
+                            {% if categories %}
+                                {% for category in categories %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                        <a href="" class="text-decoration-none h6 m-0">{{ category.title }}</a>
+                                        <span class="badge badge-primary badge-pill">{{ num_of_categories }}</span>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <a class="nav-item nav-link">Not Found Any Categories⁉️</a>
+                            {% endif %}
                         </ul>
                     </div>
 
