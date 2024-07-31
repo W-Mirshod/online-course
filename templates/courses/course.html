@@ -29,8 +29,13 @@
                     {% for category in categories %}
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                                <img class="img-fluid" src="{% static 'img/cat-1.jpg' %}" alt="">
-                                <a class="cat-overlay text-white text-decoration-none" href="">
+                                {% if category.image %}
+                                    <img class="img-fluid" src="{{ category.image.url }}" alt="">
+                                {% else %}
+                                    <img class="img-fluid" src="{% static 'img/cat-1.jpg' %}" alt="">
+                                {% endif %}
+                                <a class="cat-overlay text-white text-decoration-none"
+                                   href="{% url 'cg_detail' category.slug %}">
                                     <h4 class="text-white font-weight-medium"></h4>
                                     <span>{{ category.title }}</span>
                                 </a>

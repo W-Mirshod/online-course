@@ -68,18 +68,6 @@
                 </div>
 
                 <div class="col-lg-4 mt-5 mt-lg-0">
-                    <!-- Search Form -->
-                    <div class="mb-5">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="Keyword">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary"><i
-                                            class="fa fa-search"></i></span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
 
                     <!-- Category List -->
                     <div class="mb-5">
@@ -88,12 +76,13 @@
                             {% if categories %}
                                 {% for category in categories %}
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                        <a href="" class="text-decoration-none h6 m-0">{{ category.title }}</a>
-                                        <span class="badge badge-primary badge-pill">{{ num_of_categories }}</span>
+                                        <a href="{% url 'cg_detail' category.slug %}"
+                                           class="text-decoration-none h6 m-0">{{ category.title }}</a>
+                                        <span class="badge badge-primary badge-pill">1</span>
                                     </li>
                                 {% endfor %}
                             {% else %}
-                                <a class="nav-item nav-link">Not Found Any Categories⁉️</a>
+                                <a style="color: darkred">Not Found Any Categories⁉️</a>
                             {% endif %}
                         </ul>
                     </div>
@@ -101,26 +90,37 @@
                     <!-- Recent Post -->
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
-                        <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                            <img class="img-fluid rounded" src="#" alt="">
-                            <div class="pl-3">
-                                <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                                <small>Jan 01, 2050</small>
-                            </div>
-                        </a>
-
+                        {% if blogs %}
+                            {% for blog in blogs %}
+                                <a class="d-flex align-items-center text-decoration-none mb-3" href="">
+                                    {% if blog.image %}
+                                        <img class="img-fluid rounded" src="{% static blog.image.url %}" alt="">
+                                    {% else %}
+                                        <img class="img-fluid rounded" src="{% static 'img/blog-80x80.jpg' %}" alt="">
+                                    {% endif %}
+                                    <div class="pl-3">
+                                        <h6 class="m-1">{{ blog.title }}</h6>
+                                        <small>{{ blog.date_added }}</small>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <a style="color: darkred">Not Found Any Blog Posts⁉️</a>
+                        {% endif %}
                     </div>
 
                     <!-- Tag Cloud -->
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
                         <div class="d-flex flex-wrap m-n1">
-                            <a href="" class="btn btn-outline-primary m-1">Design</a>
-                            <a href="" class="btn btn-outline-primary m-1">Development</a>
-                            <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                            <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                            <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                            <a href="" class="btn btn-outline-primary m-1">Consulting</a>
+                            {% if categories %}
+                                {% for category in categories %}
+                                    <a href="{% url 'cg_detail' category.slug %}"
+                                       class="btn btn-outline-primary m-1">{{ category.title }}</a>
+                                {% endfor %}
+                            {% else %}
+                                <a style="color: darkred">Not Found Any Category Tags⁉️</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

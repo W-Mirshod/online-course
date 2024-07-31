@@ -19,7 +19,7 @@ class TeachersDetail(View):
         teacher = Teacher.objects.get(slug=slug)
         categories = Category.objects.all()
 
-        context = {'teacher': 'teacher',
+        context = {'teacher': teacher,
                    'categories': categories, }
 
         return render(request, 'teachers/teacher_detail.html', context)

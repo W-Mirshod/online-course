@@ -71,7 +71,10 @@ class CGDetailPage(View):
 
 class ContactPage(View):
     def get(self, request):
-        context = {'active_page': 'contact'}
+        categories = Category.objects.all()
+
+        context = {'categories': categories,
+                   'active_page': 'contact'}
 
         return render(request, 'info/contact.html', context)
 
@@ -79,8 +82,10 @@ class ContactPage(View):
 class AboutPage(View):
     def get(self, request):
         comments = Comment.objects.all()
+        categories = Category.objects.all()
 
         context = {'comments': comments,
+                   'categories': categories,
                    'active_page': 'about'}
 
         return render(request, 'info/about.html', context)

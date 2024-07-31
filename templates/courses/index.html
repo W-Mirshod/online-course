@@ -133,10 +133,10 @@
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
                                 {% if course.image %}
-                                <img class="img-fluid" src="{{ course.image.url }}" alt="">
+                                    <img class="img-fluid" src="{{ course.image.url }}" alt="">
                                 {% else %}
-                                <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
-                                {% endif %}                                
+                                    <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
+                                {% endif %}
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
                                         <small class="m-0"><i
@@ -145,7 +145,7 @@
                                         <small class="m-0"><i
                                                 class="far fa-clock text-primary mr-2"></i>{{ course.hours }}h {{ course.minutes }}m</small>
                                     </div>
-                                    <a class="h5" href="{% url 'c_detail' course.slug  %}">{{ course.title }}</a>
+                                    <a class="h5" href="{% url 'c_detail' course.slug %}">{{ course.title }}</a>
                                     <div class="border-top mt-4 pt-4">
                                         <div class="d-flex justify-content-between">
                                             <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5
@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
                                 <div class="bg-secondary p-4">
-                                    <h5>{{ teacher.full_name }}</h5>
+                                    <h5><a href="{% url 't_slug' teacher.slug %} " class="text-decoration-none">{{ teacher.full_name }}</a></h5>
                                     <p class="m-0">{{ teacher.specialization }}</p>
                                 </div>
                             </div>
