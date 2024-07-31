@@ -28,7 +28,7 @@ class SinglePage(View):
 
         blog = Blog.objects.get(slug=slug)
         categories = Category.objects.all()
-        comments = Comment.objects.filter(blog_id__slug=blog)
+        comments = Comment.objects.filter(blog_id__slug=slug)
         num_of_categories = len(categories)
 
         context = {'blog': blog,
