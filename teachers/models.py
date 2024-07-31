@@ -17,7 +17,7 @@ class Teacher(models.Model):
     twitter_link = models.CharField(max_length=150, null=True, blank=True)
     facebook_link = models.CharField(max_length=150, null=True, blank=True)
     linkedin_link = models.CharField(max_length=150, null=True, blank=True)
-    image = models.ImageField(upload_to='teachers/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/teachers', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

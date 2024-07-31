@@ -30,7 +30,11 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-4">
                             <div class="team-item rounded overflow-hidden mb-2">
                                 <div class="team-img position-relative">
+                                    {% if teacher.image.url %}
                                     <img class="img-fluid" src="{{ teacher.image.url }}" alt="">
+                                    {% else %}
+                                    <img class="img-fluid" src="{% static 'img/no_image.jpg' %}" alt="">
+                                    {% endif %}
                                     <div class="team-social">
                                         <a class="btn btn-outline-light btn-square mx-1" href="{{ teacher.twitter_link }}"><i
                                                 class="fab fa-twitter"></i></a>

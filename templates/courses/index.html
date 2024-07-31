@@ -89,7 +89,11 @@
                     {% for category in categories %}
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                                <img class="img-fluid" src="{% static 'img/cat-1.jpg' %}" alt="">
+                                {% if category.image %}
+                                    <img class="img-fluid" src="{{ category.image.url }}" alt="">
+                                {% else %}
+                                    <img class="img-fluid" src="{% static 'img/cat-1.jpg' %}" alt="">
+                                {% endif %}
                                 <a class="cat-overlay text-white text-decoration-none" href="">
                                     <h4 class="text-white font-weight-medium"></h4>
                                     <span>{{ category.title }}</span>
@@ -124,11 +128,15 @@
                     <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
                     <h1>Our Popular Courses</h1>
                 </div>
-                {% for course in courses %}
-                    <div class="row">
+                <div class="row">
+                    {% for course in courses %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
+                                {% if course.image %}
+                                <img class="img-fluid" src="{{ course.image.url }}" alt="">
+                                {% else %}
                                 <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
+                                {% endif %}                                
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
                                         <small class="m-0"><i
@@ -137,7 +145,7 @@
                                         <small class="m-0"><i
                                                 class="far fa-clock text-primary mr-2"></i>{{ course.hours }}h {{ course.minutes }}m</small>
                                     </div>
-                                    <a class="h5" href="">{{ course.title }}</a>
+                                    <a class="h5" href="{% url 'c_detail' course.slug  %}">{{ course.title }}</a>
                                     <div class="border-top mt-4 pt-4">
                                         <div class="d-flex justify-content-between">
                                             <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5
@@ -149,8 +157,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     {% else %}
@@ -182,7 +190,11 @@
                         <div class="col-md-6 col-lg-3 text-center team mb-4">
                             <div class="team-item rounded overflow-hidden mb-2">
                                 <div class="team-img position-relative">
-                                    <img class="img-fluid" src="{{ teacher.image.url }}" alt="">
+                                    {% if teacher.image %}
+                                        <img class="img-fluid" src="{{ teacher.image.url }}" alt="">
+                                    {% else %}
+                                        <img class="img-fluid" src="{% static 'img/no_image.jpg' %}" alt="">
+                                    {% endif %}
                                     <div class="team-social">
                                         <a class="btn btn-outline-light btn-square mx-1" href="#"><i
                                                 class="fab fa-twitter"></i></a>
@@ -277,7 +289,9 @@
                 {% else %}
                     <div class="col-lg-4 mb-4">
                         <div class="blog-item position-relative overflow-hidden rounded mb-2">
-                            <img class="img-fluid" src="https://webgatha.potenzaglobalsolutions.com/wp-content/themes/webgatha-child/intro/assets/images/loading.gif" alt="">
+                            <img class="img-fluid"
+                                 src="https://webgatha.potenzaglobalsolutions.com/wp-content/themes/webgatha-child/intro/assets/images/loading.gif"
+                                 alt="">
                             <a class="blog-overlay text-decoration-none" href="">
                                 <h5 style="color: darkred" class="text-white mb-3">Not Found Any Blogs⁉️</h5>
                                 <p>Write Some Blogs</p>

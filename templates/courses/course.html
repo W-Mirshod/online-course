@@ -64,8 +64,8 @@
                     <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
                     <h1>Our Popular Courses</h1>
                 </div>
-                {% for course in courses %}
-                    <div class="row">
+                <div class="row">
+                    {% for course in courses %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
                                 <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
@@ -89,8 +89,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     {% else %}

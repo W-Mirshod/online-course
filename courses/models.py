@@ -7,6 +7,7 @@ from teachers.models import Teacher
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='images/categories', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -19,11 +20,12 @@ class Course(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    number_of_students = models.IntegerField(default=0)
+    number_of_students = models.PositiveIntegerField(default=0)
     price = models.FloatField()
-    duration = models.IntegerField()
+    duration = models.PositiveIntegerField()
     teachers = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    video = models.FileField(upload_to='media/courses')
+    image = models.ImageField(upload_to='images/courses', null=True, blank=True)
+    video = models.FileField(upload_to='videos/courses')
     category = models.ForeignKey(Category, related_name='courses', on_delete=models.CASCADE, null=True, blank=True)
 
     @property

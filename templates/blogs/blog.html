@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
     <!-- Header Start -->
@@ -27,7 +27,11 @@
                             {% for blog in blogs %}
                                 <div class="col-lg-6 mb-4">
                                     <div class="blog-item position-relative overflow-hidden rounded mb-2">
+                                        {% if blog.image.url %}
                                         <img class="img-fluid" src="{{ blog.image.url }}" alt="">
+                                        {% else %}
+                                        <img class="img-fluid" src="{% static 'img/no_image.jpg' %}" alt="">
+                                        {% endif %}
                                         <a class="blog-overlay text-decoration-none" href="">
                                             <h5 class="text-white mb-3">{{ blog.content }}</h5>
                                             <p class="text-primary m-0">{{ blog.date_added }}</p>

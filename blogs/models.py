@@ -14,7 +14,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     date_added = models.DateField(auto_now_add=True)
-    image = models.ImageField(upload_to='images/blogs/')
+    image = models.ImageField(upload_to='images/blogs')
     auther_id = models.ManyToManyField(Author, related_name='blogs')
 
     def save(self, *args, **kwargs):

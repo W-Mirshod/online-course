@@ -42,7 +42,12 @@
                 <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
                 <div class="text-left">
                     <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
-                    <small>Almazar, Tashkent, Uzbekistan</small>
+                    <a href="https://yandex.com/maps/10335/tashkent/?from=mapframe&ll=69.203634%2C41.285721&mode
+                       =search&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D94800077397&sctx=ZAAAAAgBEAAaKAoSCb5QwHYwTVFAET
+                       cclgZ%2BpERAEhIJI51Xq5marj8RIq629DL%2Fpj8iBgABAgMEBSgKOABAoZ8GSAFqAnV6nQHNzEw9oAEAqAEAvQHbYMORwg
+                       EG1cSZlOECggIaTmFqb3QgVGEnbGltIFhhZHJhIGZpbGlhbGmKAgCSAgCaAgxkZXNrdG9wLW1hcHM%3D&sll=69.203634%2
+                       C41.285721&source=mapframe&sspn=0.000500%2C0.000419&text=Najot%20Ta%27lim%20Xadra%20filiali&
+                       utm_source=mapframe&z=21"><small>Tashkent, Uzbekistan</small></a>
                 </div>
             </div>
         </div>
@@ -82,11 +87,11 @@
                  id="navbar-vertical" style="width: calc(100% - 30px); z-index: 9;">
                 <div class="navbar-nav w-100">
                     {% if categories %}
-                    {% for category in categories %}    
-                    <a href="" class="nav-item nav-link">{{ category.title }}</a>
-                    {% endfor %}    
+                        {% for category in categories %}
+                            <a href="" class="nav-item nav-link">{{ category.title }}</a>
+                        {% endfor %}
                     {% else %}
-                    <a class="nav-item nav-link">Not Found Any Categories⁉️</a>   
+                        <a class="nav-item nav-link">Not Found Any Categories⁉️</a>
                     {% endif %}
                 </div>
             </nav>
@@ -132,91 +137,91 @@
 {% block content %}
 {% endblock %}
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
-        <div class="row pt-5">
-            <div class="col-lg-7 col-md-12">
-                <div class="row">
-                    <div class="col-md-6 mb-5">
-                        <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Get In Touch</h5>
-                        <p><i class="fa fa-map-marker-alt mr-2"></i>Almazar, Tashkent, Uzbekistan</p>
-                        <p><i class="fa fa-phone-alt mr-2"></i><a href="tel:+998907126437">+998 90 712 64 37</a></p>
-                        <p><i class="fa fa-envelope mr-2"></i><a
-                                href="mailto:trading3526@gmail.com">trading3526@gmail.com</a></p>
-                        <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-outline-light btn-square mr-2" href="https://www.facebook.com/najottalim"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2" href="https://www.youtube.com/@najottalim"><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2" href="https://t.me/najottalim"><i
-                                    class="fab fa-telegram"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2"
-                               href="https://www.linkedin.com/company/najottalim/"><i class="fab fa-linkedin"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2"
-                               href="https://www.instagram.com/najottalim/"><i
-                                    class="fab fa-instagram"></i></a>
-                        </div>
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
+    <div class="row pt-5">
+        <div class="col-lg-7 col-md-12">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Get In Touch</h5>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Almazar, Tashkent, Uzbekistan</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i><a href="tel:+998907126437">+998 90 712 64 37</a></p>
+                    <p><i class="fa fa-envelope mr-2"></i><a
+                            href="mailto:trading3526@gmail.com">trading3526@gmail.com</a></p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-outline-light btn-square mr-2" href="https://www.facebook.com/najottalim"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-square mr-2" href="https://www.youtube.com/@najottalim"><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-square mr-2" href="https://t.me/najottalim"><i
+                                class="fab fa-telegram"></i></a>
+                        <a class="btn btn-outline-light btn-square mr-2"
+                           href="https://www.linkedin.com/company/najottalim/"><i class="fab fa-linkedin"></i></a>
+                        <a class="btn btn-outline-light btn-square mr-2"
+                           href="https://www.instagram.com/najottalim/"><i
+                                class="fab fa-instagram"></i></a>
                     </div>
-                    <div class="col-md-6 mb-5">
-                        <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Our Courses</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            {% if categories %}
-                                {% for category in categories %}
-                                    <a class="text-white mb-2"><i class="fa fa-angle-right mr-2">
-                                    </i>{{ category.title }}</a>
-                                {% endfor %}
-                            {% else %}
-                                <a class="text-white mb-5"><i class="fa fa-angle-right mr-2">
-                                </i>Not Found Any Categories⁉️</a>
-                            {% endif %}
-                        </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Our Courses</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        {% if categories %}
+                            {% for category in categories %}
+                                <a class="text-white mb-2"><i class="fa fa-angle-right mr-2">
+                                </i>{{ category.title }}</a>
+                            {% endfor %}
+                        {% else %}
+                            <a class="text-white mb-5"><i class="fa fa-angle-right mr-2">
+                            </i>Not Found Any Categories⁉️</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-12 mb-5">
-                <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Newsletter</h5>
-                <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu
-                    kasd
-                    sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
-                <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 30px;"
-                               placeholder="Your Email Address">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-4">Sign Up</button>
-                        </div>
+        </div>
+        <div class="col-lg-5 col-md-12 mb-5">
+            <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Newsletter</h5>
+            <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu
+                kasd
+                sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
+            <div class="w-100">
+                <div class="input-group">
+                    <input type="text" class="form-control border-light" style="padding: 30px;"
+                           placeholder="Your Email Address">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary px-4">Sign Up</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
-         style="border-color: rgba(256, 256, 256, .1) !important;">
-        <div class="row">
-            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-                <p class="m-0 text-white">&copy; <a href="#">Domain Name</a>. All Rights Reserved. Designed by <a
-                        href="https://htmlcodex.com">HTML Codex</a>
-                </p>
-            </div>
-            <div class="col-lg-6 text-center text-md-right">
-                <ul class="nav d-inline-flex">
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Terms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">FAQs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Help</a>
-                    </li>
-                </ul>
-            </div>
+</div>
+<div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
+     style="border-color: rgba(256, 256, 256, .1) !important;">
+    <div class="row">
+        <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+            <p class="m-0 text-white">&copy; <a href="#">Domain Name</a>. All Rights Reserved. Designed by <a
+                    href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
+        <div class="col-lg-6 text-center text-md-right">
+            <ul class="nav d-inline-flex">
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">Privacy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">Terms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">FAQs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">Help</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <!-- Footer End -->
+</div>
+<!-- Footer End -->
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
