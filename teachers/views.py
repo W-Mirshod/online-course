@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from courses.models import Category, Comment
@@ -8,7 +8,7 @@ from teachers.models import Teacher
 
 class TeachersPage(View):
     def get(self, request):
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
         search = request.GET.get('search_query')
 
         if search:
@@ -27,7 +27,7 @@ class TeachersPage(View):
 class TeachersDetail(View):
     def get(self, request, slug):
         teacher = Teacher.objects.get(slug=slug)
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
         comments = Comment.objects.filter(teacher_id=teacher.id).order_by('-created_at')
 
         context = {'teacher': teacher,

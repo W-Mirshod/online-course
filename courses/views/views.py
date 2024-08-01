@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from blogs.models import Blog
@@ -26,7 +27,8 @@ class IndexPage(View):
 
 class BaseIndexPage(View):
     def get(self, request):
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
+
         context = {'categories': categories, }
 
         return render(request, 'base.html', context)
@@ -34,7 +36,7 @@ class BaseIndexPage(View):
 
 class CoursesPage(View):
     def get(self, request):
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
         search = request.GET.get('search_query')
 
         if search:
@@ -87,7 +89,7 @@ class DeleteComment(View):
 
 class ContactPage(View):
     def get(self, request):
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
 
         context = {'categories': categories,
                    'active_page': 'contact'}
@@ -98,7 +100,7 @@ class ContactPage(View):
 class AboutPage(View):
     def get(self, request):
         comments = Comment.objects.order_by('-created_at')[:5]
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
 
         context = {'comments': comments,
                    'categories': categories,

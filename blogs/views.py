@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from blogs.forms import CommentForm
@@ -9,7 +10,7 @@ from courses.models import Category, Comment
 class BlogsPage(View):
     def get(self, request):
         blogs = Blog.objects.all()
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
         num_of_categories = len(categories)
 
         paginator = Paginator(blogs, 2)
@@ -28,7 +29,7 @@ class BlogsPage(View):
 class SinglePage(View):
     def get(self, request):
         blog = Blog.objects.order_by('-created_at').first()
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
         comments = Comment.objects.filter(blog_id__slug=blog.slug).order_by('-created_at')
         num_of_categories = len(categories)
 
@@ -45,15 +46,13 @@ class BlogDetail(View):
     def get(self, request, slug):
         blogs = Blog.objects.all()
         blog = Blog.objects.get(slug=slug)
-        categories = Category.objects.all()
         comments = Comment.objects.filter(blog_id__slug=slug).order_by('-created_at')
-        num_of_categories = len(categories)
+        categories = Category.objects.annotate(course_count=Count('courses'))
 
         context = {'blog': blog,
                    'blogs': blogs,
                    'categories': categories,
                    'comments': comments,
-                   'num_of_categories': num_of_categories,
                    'active_page': 'blog'}
 
         return render(request, 'blogs/blog_detail.html', context)

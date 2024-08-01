@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render
 from django.views import View
 from blogs.models import Blog
@@ -23,8 +24,12 @@ class CategoryDetailPage(View):
     def get(self, request, slug):
         category = None
         if Category.objects.filter(slug=slug).exists():
-            category = Category.objects.get(slug=slug)
-        categories = Category.objects.all()
+            category = Category.objects.filter(slug=slug).annotate(course_count=Count('courses'))
+        categories = Category.objects.annotate(course_count=Count('courses'))
+        print(categories)
+        print(categories)
+        print(categories)
+        print(categories)
         category_videos = Course.objects.filter(category=category)
         blogs = Blog.objects.all()
 
