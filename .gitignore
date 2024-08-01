@@ -104,7 +104,12 @@ ENV/
 env/
 env.bak/
 venv.bak/
+
+# some other ones
 media
+blogs/migrations
+courses/migrations
+teachers/migrations
 
 # Spyder project settings
 .spyderproject
