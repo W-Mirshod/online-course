@@ -63,3 +63,11 @@ class AddComment(View):
 
             return redirect('t_slug', slug=slug)
         return redirect('t_slug', slug=slug)
+
+
+class DeleteComment(View):
+    def get(self, request, slug):
+        comment_id = request.GET.get('comment_id')
+        comment = get_object_or_404(Comment, id=comment_id)
+        comment.delete()
+        return redirect('t_slug', slug=slug)

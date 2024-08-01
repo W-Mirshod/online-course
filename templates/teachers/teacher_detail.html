@@ -55,7 +55,7 @@
                                         <h6>{{ comment.name }}<small> <i>{{ comment.created_at }}</i></small></h6>
                                         <p>{{ comment.comment }}</p>
                                         {% if user.is_superuser %}
-                                            <form method="get" action="{% url 'del_comment_blog' blog.slug %}">
+                                            <form method="get" action="{% url 'del_comment_teacher' teacher.slug %}">
                                                 <input type="hidden" name="comment_id" value="{{ comment.id }}">
                                                 <button class="btn btn-sm btn-secondary" type="submit">
                                                     Delete
