@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect, render
 from django.views import View
 from courses.forms import SignUpForm, LoginForm
@@ -40,3 +40,11 @@ class LogInView(View):
             else:
                 form.add_error(None, 'Invalid username or password.')
         return render(request, 'auth.html', {'form': form, 'form_type': 'login'})
+
+
+class LogOutView(View):
+    def get(self, request):
+        logout(request)
+        if not request.user.is_authenticated:
+            return redirect('index')
+        return render(request, 'auth.html')
