@@ -40,3 +40,11 @@
 12. categoriesda videolarni ko'rsa bo'ladi pauza tugmasini bosish orqali, ustiga bosilda detail page ga yuborvoradi:
 ![image](https://github.com/user-attachments/assets/00044ff1-43a1-41a4-96f9-24bca274cdd1)
 
+13. annotate orqali har bir category da nechta kurslar borligini ko'rsatadi:
+![image](https://github.com/user-attachments/assets/edfba94b-557e-44cd-9411-427b4136d844)
+
+
+
+
+
+
