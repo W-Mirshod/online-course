@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from courses.views.details import CourseDetailPage, CategoryDetailPage
+from courses.views.details import CourseDetailPage, CategoryDetailPage, StudentRoomPage
 from courses.views.authentication import SignUpView, LogInView, LogOutView
 from courses.views.views import IndexPage, CoursesPage, ContactPage, AboutPage, BaseIndexPage, AddComment, \
     DeleteComment, GettingCourses
@@ -15,6 +15,7 @@ urlpatterns = [  # index
                   path('course/<slug:slug>/', CourseDetailPage.as_view(), name='c_detail'),
                   path('order-course/', GettingCourses.as_view(), name='ordering'),
                   path('category/<slug:slug>/', CategoryDetailPage.as_view(), name='cg_detail'),
+                  path('student-page/', StudentRoomPage.as_view(), name='student_room'),
                   path('contact/', ContactPage.as_view(), name='contact'),
                   path('about/', AboutPage.as_view(), name='about'),
 

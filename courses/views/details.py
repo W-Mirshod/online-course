@@ -35,3 +35,17 @@ class CategoryDetailPage(View):
                    'blogs': blogs, }
 
         return render(request, 'courses/category_detail.html', context)
+
+
+class StudentRoomPage(View):
+    def get(self, request):
+        user = request.user
+        courses = Course.objects.filter(bought_courses__user=user)
+        comments = Comment.objects.filter(email__icontains=user.email).order_by('-created_at')
+        categories = Category.objects.annotate(course_count=Count('courses'))
+
+        context = {'courses': courses,
+                   'comments': comments,
+                   'categories': categories, }
+
+        return render(request, 'others/student_page.html', context)

@@ -53,7 +53,3 @@ class LogOutView(View):
             return redirect('index')
         return render(request, 'others/auth.html')
 
-
-def my_view(request):
-    time.sleep(2)
-    return render(request, 'others/loading.html')

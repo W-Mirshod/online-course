@@ -12,18 +12,21 @@ from teachers.models import Teacher
 
 class IndexPage(View):
     def get(self, request):
+        user = request.user
         courses = Course.objects.annotate(average_rating=Avg('course_comments__rating'),
                                           counts_of_ratings=Sum('course_comments__rating')).order_by('-created_at')[:8]
         categories = Category.objects.order_by('-created_at')[:4]
         comments = Comment.objects.order_by('-created_at')[:5]
         teachers = Teacher.objects.order_by('-created_at')[:4]
         blogs = Blog.objects.order_by('-created_at')[:3]
+        courses_for_purchase = Course.objects.exclude(bought_courses__user=user)
 
         context = {'categories': categories,
                    'teachers': teachers,
                    'comments': comments,
                    'courses': courses,
                    'blogs': blogs,
+                   'courses_for_purchase': courses_for_purchase,
                    'active_page': 'home'}
 
         return render(request, 'courses/index.html', context)

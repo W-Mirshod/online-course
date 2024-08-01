@@ -205,18 +205,13 @@
             <p>Editing</p>
             <a>All Courses</a>
             <p>All Comments </p>
-            <form method="post">
-                {% csrf_token %}
-                <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 30px;"
-                               placeholder="Enter Your Password">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-4">ENTER</button>
-                        </div>
+            <div class="w-100">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <a href="{% url 'student_room' %}" class="btn btn-primary px-4">ENTER</a>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

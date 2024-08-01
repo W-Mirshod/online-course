@@ -1,5 +1,5 @@
-from import_export import resources
 from .models import Teacher
+from import_export import resources
 
 
 class TeacherResource(resources.ModelResource):
