@@ -25,6 +25,20 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style>
+        .star-rating {
+            display: inline-flex; /* Align stars horizontally */
+            font-size: 30px; /* Size of the stars */
+            color: #d3d3d3; /* Gray color for empty stars */
+            cursor: default; /* Cursor style */
+            margin: 0;
+            padding: 0;
+        }
+
+        .star.active {
+            color: #ffcc00; /* Yellow color for active stars */
+        }
+    </style>
 </head>
 
 

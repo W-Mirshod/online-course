@@ -50,6 +50,28 @@
                                     <div class="media-body">
                                         <h6>{{ comment.name }}<small> <i>{{ comment.created_at }}</i></small></h6>
                                         <p>{{ comment.comment }}</p>
+                                        <div class="star-rating">
+                                            <!-- 1 Star -->
+                                            <label for="1-stars-{{ comment.id }}"
+                                                   class="star {% if comment.rating >= 1 %}active{% endif %}">&#9733;</label>
+
+                                            <!-- 2 Stars -->
+                                            <label for="2-stars-{{ comment.id }}"
+                                                   class="star {% if comment.rating >= 2 %}active{% endif %}">&#9733;</label>
+
+                                            <!-- 3 Stars -->
+                                            <label for="3-stars-{{ comment.id }}"
+                                                   class="star {% if comment.rating >= 3 %}active{% endif %}">&#9733;</label>
+
+                                            <!-- 4 Stars -->
+                                            <label for="4-stars-{{ comment.id }}"
+                                                   class="star {% if comment.rating >= 4 %}active{% endif %}">&#9733;</label>
+
+                                            <!-- 5 Stars -->
+                                            <label for="5-stars-{{ comment.id }}"
+                                                   class="star {% if comment.rating >= 5 %}active{% endif %}">&#9733;</label>
+                                        </div>
+
                                         {% if comment.media_file %}
                                             {% if comment.media_file %}
                                                 <video class="card-img-top" width="640" style="height: auto;" controls>
