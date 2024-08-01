@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import FormView
 
@@ -44,20 +44,22 @@ class CoursesPage(View):
         return render(request, 'courses/course.html', context)
 
 
-class CommentFormView(FormView):
-    template_name = 'courses/course_detail.html'
-    form_class = CommentForm
+class AddComment(View):
+    def get(self, request):
+        form = CommentForm()
+        return render(request, 'courses/course_detail.html', {'form': form})
 
-    # success_url = '/thank-you/'
+    def post(self, request):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.name = request.POST.get('name')
+            comment.email = request.POST.get('email')
+            comment.comment = request.POST.get('comment')
+            comment.rating = request.POST.get('rating')
+            comment.save()
 
-    def form_valid(self, form):
-        # Process the form data (e.g., save to database)
-        # You can access form fields using form.cleaned_data
-        # Example: name = form.cleaned_data['name']
-        # Implement your logic here
-
-        # Redirect to the success URL
-        return super().form_valid(form)
+            return redirect('course')
 
 
 class ContactPage(View):
