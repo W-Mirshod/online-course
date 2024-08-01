@@ -1,6 +1,8 @@
 import time
+from profile import Profile
+
 from django.views import View
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from courses.forms import SignUpForm, LoginForm
 from django.contrib.auth import login, authenticate, logout
 
