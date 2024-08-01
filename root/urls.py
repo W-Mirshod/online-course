@@ -16,10 +16,14 @@ from root import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from courses.views.views import CoursesPage
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('blog/', include('blogs.urls')),
+                  path('accounts/profile/', CoursesPage.as_view(), name='course'),
                   path('courses/', include('courses.urls')),
                   path('teachers/', include('teachers.urls')),
+                  path('social-auth/', include('social_django.urls', namespace='social')),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

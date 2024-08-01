@@ -35,7 +35,7 @@
                             class="fab fa-github"></i></a>
                     <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i
                             class="fab fa-codepen"></i></a>
-                    <a href="mailto:farazc60@gmail.com" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="social"><i class="fab fa-google"></i></a>
                 </div>
                 <span>Or use your Email for registration</span>
 
@@ -67,7 +67,7 @@
                             class="fab fa-github"></i></a>
                     <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i
                             class="fab fa-codepen"></i></a>
-                    <a href="mailto:farazc60@gmail.com" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="social"><i class="fab fa-google"></i></a>
                 </div>
                 <span> Or sign in using E-Mail Address</span>
                 <label>
