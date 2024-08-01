@@ -24,6 +24,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,3 +113,37 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'courses.User'
+
+JAZZMIN_SETTINGS = {
+    'site_title': 'Online Course',
+    'site_header': 'E-Platform',
+    'site_brand': 'WWW',
+    'site_logo': 'https://media.emailonacid.com/wp-content/uploads/2018/06/HC-GettingStarted.png',
+    'welcome_sign': 'Welcome to the Admin Area',
+    'copyright': 'Najot Ta\'lim',
+    'search_model': 'auth.User',
+    'user_avatar': 'https://media.emailonacid.com/wp-content/uploads/2018/06/HC-GettingStarted.png',
+
+    # Top Menu #
+    'topmenu_links': [
+        {'name': 'Home', 'url': 'admin:index', 'permissions': ['auth.view_user']},
+        {'name': 'Support', 'url': 'https://support.example.com', 'new_window': True},
+    ],
+
+    # Side Menu #
+    'show_sidebar': True,
+
+    'navigation_expanded': True,
+
+    'icons': {
+        'auth': 'fas fa-users-cog',
+        'auth.user': 'fas fa-user',
+        'auth.Group': 'fas fa-users',
+    },
+
+    # Relative paths to custom CSS/JS files
+    'custom_css': 'css/admin_custom.css',
+    'custom_js': 'js/admin_custom.js',
+
+    'show_ui_builder': True,
+}
