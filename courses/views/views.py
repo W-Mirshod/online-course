@@ -60,10 +60,12 @@ class CGDetailPage(View):
     def get(self, request, slug):
         category = Category.objects.get(slug=slug)
         categories = Category.objects.all()
+        category_videos = Course.objects.filter(category=category)
         blogs = Blog.objects.all()
 
         context = {'category': category,
                    'categories': categories,
+                   'category_videos': category_videos,
                    'blogs': blogs, }
 
         return render(request, 'courses/category_detail.html', context)
