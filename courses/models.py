@@ -1,7 +1,10 @@
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.text import slugify
 
 from blogs.models import Author, Blog
+from courses.managers import CustomUserManager
 from teachers.models import Teacher
 
 
@@ -95,3 +98,20 @@ class Comment(models.Model):
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments')
     blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
     author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments')
+
+
+class User(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(unique=True, max_length=50)
+    birth_of_date = models.DateField(null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=True)
+
+    objects = CustomUserManager()
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return self.username

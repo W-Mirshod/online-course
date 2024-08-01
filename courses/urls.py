@@ -1,7 +1,7 @@
 from django.urls import path
 
 from courses.views.views import IndexPage, CoursesPage, ContactPage, AboutPage, BaseIndexPage, CDetailPage, CGDetailPage
-from courses.views.authentication import AuthenticationView
+from courses.views.authentication import SignUpView
 
 urlpatterns = [
     # index
@@ -14,5 +14,5 @@ urlpatterns = [
     path('about/', AboutPage.as_view(), name='about'),
 
     # auth
-    path('auth/', AuthenticationView.as_view(), name='auth'),
+    path('auth/', SignUpView.as_view(), name='auth'),
 ]
