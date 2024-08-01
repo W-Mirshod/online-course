@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8">
@@ -187,18 +187,23 @@
         </div>
         <div class="col-lg-5 col-md-12 mb-5">
             <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Student's Room</h5>
-            <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu
-                kasd
-                sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
-            <div class="w-100">
-                <div class="input-group">
-                    <input type="text" class="form-control border-light" style="padding: 30px;"
-                           placeholder="Your Email Address">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary px-4">Sign Up</button>
+            <a>Statics</a>
+            <p>Editing</p>
+            <a>All Courses</a>
+            <p>All Comments </p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="w-100">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light" style="padding: 30px;"
+                               placeholder="Enter Your Password">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary px-4">ENTER</button>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

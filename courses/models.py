@@ -101,10 +101,10 @@ class Comment(BaseModel):
     comment = models.TextField()
     media_file = models.FileField(upload_to='comments/', blank=True, null=True)
     is_published = models.BooleanField(default=True)
-    rating = models.CharField(max_length=100, choices=RatingChoices.choices, default=RatingChoices.Zero.value)
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
-    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
-    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
+    rating = models.PositiveIntegerField(choices=RatingChoices.choices, default=RatingChoices.Zero.value)
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_comments', blank=True, null=True)
+    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='blog_comments', blank=True, null=True)
+    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teacher_comments', blank=True, null=True)
 
     def __str__(self):
         return self.name

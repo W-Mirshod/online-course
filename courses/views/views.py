@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from blogs.models import Blog
@@ -9,10 +9,10 @@ from teachers.models import Teacher
 
 class IndexPage(View):
     def get(self, request):
+        courses = Course.objects.annotate(average_rating=Avg('course_comments__rating')).order_by('-created_at')[:8]
         categories = Category.objects.order_by('-created_at')[:4]
         comments = Comment.objects.order_by('-created_at')[:5]
         teachers = Teacher.objects.order_by('-created_at')[:4]
-        courses = Course.objects.order_by('-created_at')[:8]
         blogs = Blog.objects.order_by('-created_at')[:3]
 
         context = {'categories': categories,
@@ -37,6 +37,7 @@ class BaseIndexPage(View):
 class CoursesPage(View):
     def get(self, request):
         categories = Category.objects.annotate(course_count=Count('courses'))
+        courses = Course.objects.annotate(average_rating=Avg('course_comments__rating'))
         search = request.GET.get('search_query')
 
         if search:
@@ -45,7 +46,7 @@ class CoursesPage(View):
             course = Course.objects.all()
 
         context = {'categories': categories,
-                   'courses': course,
+                   'courses': courses,
                    'active_page': 'courses'}
 
         return render(request, 'courses/course.html', context)

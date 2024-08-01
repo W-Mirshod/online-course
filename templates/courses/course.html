@@ -84,12 +84,14 @@
                     {% for course in courses %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
-                                <a href="{% url 'c_detail' course.slug %}">
-                                    <video width="460" height="280">
-                                        <source src="{{ course.video.url }}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </a>
+                                {% if course.video %}
+                                    <a href="{% url 'c_detail' course.slug %}">
+                                        <video class="card-img-top" width="100%" controls>
+                                            <source src="{{ course.video.url }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </a>
+                                {% endif %}
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
                                         <small class="m-0"><i
@@ -101,9 +103,17 @@
                                     <a class="h5" href="{% url 'c_detail' course.slug %}">{{ course.title }}</a>
                                     <div class="border-top mt-4 pt-4">
                                         <div class="d-flex justify-content-between">
-                                            <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5
-                                                <small>(250)</small>
-                                            </h6>
+                                            {% if course.average_rating %}
+                                                <h6 class="m-0"><i
+                                                        class="fa fa-star text-primary mr-2"></i>{{ course.average_rating|floatformat:1 }}
+                                                    <small>(250)</small>
+                                                </h6>
+                                            {% else %}
+                                                <h6 class="m-0"><i
+                                                        class="fa fa-star text-primary mr-2"></i>0
+                                                    <small>(0)</small>
+                                                </h6>
+                                            {% endif %}
                                             <h5 class="m-0">${{ course.price }}</h5>
                                         </div>
                                     </div>
