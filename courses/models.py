@@ -8,7 +8,15 @@ from courses.managers import CustomUserManager
 from teachers.models import Teacher
 
 
-class Category(models.Model):
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Category(BaseModel):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     image = models.ImageField(upload_to='images/categories', null=True, blank=True)
@@ -35,7 +43,7 @@ class Category(models.Model):
         return self.title
 
 
-class Course(models.Model):
+class Course(BaseModel):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -80,7 +88,7 @@ class Course(models.Model):
         return self.title
 
 
-class Comment(models.Model):
+class Comment(BaseModel):
     class RatingChoices(models.TextChoices):
         Zero = '0'
         One = '1'
@@ -94,7 +102,6 @@ class Comment(models.Model):
     comment = models.TextField()
     is_published = models.BooleanField(default=True)
     rating = models.CharField(max_length=100, choices=RatingChoices.choices, default=RatingChoices.Zero.value)
-    written = models.DateTimeField(auto_now_add=True)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments')
     blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
     author_id = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='comments')

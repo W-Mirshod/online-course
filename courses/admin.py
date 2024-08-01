@@ -1,10 +1,11 @@
 from django.contrib import admin
+
 from courses.models import Course, Category, Comment, User
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    fields = ['title', 'image']
+    fields = ['title', 'image', 'created_at']
     list_display = ['title']
     search_fields = ['title']
     list_filter = ['title']
@@ -21,10 +22,10 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    fields = ['name', 'email ', 'comment', 'is_published', 'rating', 'written', 'course_id', 'blog_id', 'author_id', ]
-    list_display = ('name', 'email', 'comment', 'is_published', 'rating', 'written')
+    fields = ['name', 'email ', 'comment', 'is_published', 'rating', 'created_at', 'course_id', 'blog_id', 'author_id']
+    list_display = ('name', 'email', 'comment', 'is_published', 'rating', 'created_at')
     search_fields = ('name', 'email')
-    list_filter = ('is_published', 'rating', 'written')
+    list_filter = ('is_published', 'rating', 'created_at')
 
 
 @admin.register(User)

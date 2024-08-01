@@ -7,10 +7,10 @@ from teachers.models import Teacher
 
 class IndexPage(View):
     def get(self, request):
-        categories = Category.objects.all()
-        teachers = Teacher.objects.all()
-        courses = Course.objects.all()
-        blogs = Blog.objects.all()
+        categories = Category.objects.order_by('-created_at')[:4]
+        teachers = Teacher.objects.order_by('-created_at')[:4]
+        courses = Course.objects.order_by('-created_at')[:8]
+        blogs = Blog.objects.order_by('-created_at')[:3]
 
         context = {'categories': categories,
                    'teachers': teachers,

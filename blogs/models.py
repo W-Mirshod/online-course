@@ -1,8 +1,17 @@
 from django.db import models
+
 from django.utils.text import slugify
 
 
-class Author(models.Model):
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Author(BaseModel):
     full_name = models.CharField(max_length=100)
     education = models.CharField(max_length=255, null=True, blank=True)
 
@@ -10,11 +19,10 @@ class Author(models.Model):
         return self.full_name
 
 
-class Blog(models.Model):
+class Blog(BaseModel):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     content = models.TextField()
-    date_added = models.DateField(auto_now_add=True)
     image = models.ImageField(upload_to='images/blogs')
     auther_id = models.ManyToManyField(Author, related_name='blogs')
 

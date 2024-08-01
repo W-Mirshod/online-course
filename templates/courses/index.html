@@ -94,7 +94,8 @@
                                 {% else %}
                                     <img class="img-fluid" src="{% static 'img/cat-1.jpg' %}" alt="">
                                 {% endif %}
-                                <a class="cat-overlay text-white text-decoration-none" href="{% url 'cg_detail' category.slug %}">
+                                <a class="cat-overlay text-white text-decoration-none"
+                                   href="{% url 'cg_detail' category.slug %}">
                                     <h4 class="text-white font-weight-medium"></h4>
                                     <span>{{ category.title }}</span>
                                 </a>
@@ -133,9 +134,12 @@
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="rounded overflow-hidden mb-2">
                                 {% if course.image %}
-                                    <img class="img-fluid" src="{{ course.image.url }}" alt="">
+                                    <a href="{% url 'c_detail' course.slug %}"><img class=" img-fluid" src="
+                                    {{ course.image.url }}" alt=""></a>
                                 {% else %}
-                                    <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
+                                    <a href="{% url 'c_detail' course.slug %}">
+                                        <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="">
+                                    </a>
                                 {% endif %}
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
@@ -205,7 +209,8 @@
                                     </div>
                                 </div>
                                 <div class="bg-secondary p-4">
-                                    <h5><a href="{% url 't_slug' teacher.slug %} " class="text-decoration-none">{{ teacher.full_name }}</a></h5>
+                                    <h5><a href="{% url 't_slug' teacher.slug %} "
+                                           class="text-decoration-none">{{ teacher.full_name }}</a></h5>
                                     <p class="m-0">{{ teacher.specialization }}</p>
                                 </div>
                             </div>
@@ -304,50 +309,52 @@
     </div>
     <!-- Blog End -->
     {% if user.is_authenticated %}
-    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
-    <div class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-lg-7 mb-5 mb-lg-0">
-                <div class="mb-4">
-                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Need Any Courses</h5>
-                    <h1 class="text-white">30% Off For New Students</h1>
-                </div>
-                <p class="text-white">What We offer:</p>
-                <ul class="list-inline text-white m-0">
-                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Courses</li>
-                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Categories</li>
-                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Teachers</li>
-                </ul>
-            </div>
-            <div class="col-lg-5">
-                <div class="card border-0">
-                    <div class="card-header bg-light text-center p-4">
-                        <h1 class="m-0">Buy Courses Now</h1>
+        <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+            <div class="container py-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 mb-5 mb-lg-0">
+                        <div class="mb-4">
+                            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Need Any
+                                Courses</h5>
+                            <h1 class="text-white">30% Off For New Students</h1>
+                        </div>
+                        <p class="text-white">What We offer:</p>
+                        <ul class="list-inline text-white m-0">
+                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Courses</li>
+                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Categories</li>
+                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Best Teachers</li>
+                        </ul>
                     </div>
-                    <div class="card-body rounded-bottom bg-primary p-5">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your name"
-                                       required="required"/>
+                    <div class="col-lg-5">
+                        <div class="card border-0">
+                            <div class="card-header bg-light text-center p-4">
+                                <h1 class="m-0">Buy Courses Now</h1>
                             </div>
-                            <div class="form-group">
-                                <select class="custom-select border-0 px-4" style="height: 47px;">
-                                    <option selected>Select a course</option>
-                                    <option value="1">Course 1</option>
-                                    <option value="2">Course 1</option>
-                                    <option value="3">Course 1</option>
-                                </select>
+                            <div class="card-body rounded-bottom bg-primary p-5">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control border-0 p-4" placeholder="Your name"
+                                               required="required"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="custom-select border-0 px-4" style="height: 47px;">
+                                            <option selected>Select a course</option>
+                                            <option value="1">Course 1</option>
+                                            <option value="2">Course 1</option>
+                                            <option value="3">Course 1</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <div>
-                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
     {% endif %}
 
 
