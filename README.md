@@ -78,7 +78,15 @@
 ![image](https://github.com/user-attachments/assets/8c037d96-d602-4ff4-957c-5ef4c2be42c9)
 
 
-18. student room page  student xarid qilgan kurslarni va user qoldirgan barcha commentlarni chiqarib beradi bu pageda:
+18. activation link
+![image](https://github.com/user-attachments/assets/61a3edbb-1896-47b4-80ac-10550f89dc5a)
+
+
+19. http://127.0.0.1:8000/ ga hech qanaqa kod yo'qligi uchun HomePagega yuboradigan HTML:
+![image](https://github.com/user-attachments/assets/a3adbc09-8546-40ac-9c45-d8cef219ff4c)
+
+
+21. student room page  student xarid qilgan kurslarni va user qoldirgan barcha commentlarni chiqarib beradi bu pageda:
 ![image](https://github.com/user-attachments/assets/af538321-7089-427a-9c6b-19e8dcb0a6ed)
 ![Screenshot 2024-08-01 113415](https://github.com/user-attachments/assets/7ce807b5-a375-4792-8b82-084625479d25)
 

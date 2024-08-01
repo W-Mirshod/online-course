@@ -1,27 +1,11 @@
-import time
-from profile import Profile
-
+import uuid
 from django.views import View
 from django.shortcuts import redirect, render, get_object_or_404
-from courses.forms import SignUpForm, LoginForm, ContactForm
+from django.views.generic import CreateView
+from courses.forms import SignUpForm, LoginForm
 from django.contrib.auth import login, authenticate, logout
 
-
-class SignUpView(View):
-    def get(self, request):
-        form = SignUpForm()
-        return render(request, 'others/auth.html', {'form': form})
-
-    def post(self, request):
-        form = SignUpForm(request.POST)
-
-        if form.is_valid():
-            user = form.save()
-            backend = 'django.contrib.auth.backends.ModelBackend'
-            login(request, user, backend=backend)
-            return redirect('index')
-
-        return render(request, 'others/auth.html', {'form': form})
+from courses.models import Profile
 
 
 class LogInView(View):
@@ -46,6 +30,39 @@ class LogInView(View):
         return render(request, 'others/auth.html', {'form': form, 'form_type': 'login'})
 
 
+class SignUpView(CreateView):
+    template_name = "others/auth.html"
+    form_class = SignUpForm
+    success_url = "/courses/home/"
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.is_active = False
+        user.save()
+
+        Profile.objects.get_or_create(user=user)
+
+        profile = user.profile
+        profile.activation_token = str(uuid.uuid4())
+        profile.save()
+
+        form.send_email(user)
+        return super().form_valid(form)
+
+
+class ActivateView(View):
+    def get(self, request, token):
+        profile = get_object_or_404(Profile, activation_token=token)
+        user = profile.user
+        user.is_active = True
+        user.save()
+        profile.delete()
+        user.backend = "django.contrib.auth.backends.ModelBackend"
+        login(request, user, backend=user.backend)
+        login(request, user)
+        return redirect('index')
+
+
 class LogOutView(View):
     def get(self, request):
         logout(request)
@@ -53,3 +70,7 @@ class LogOutView(View):
             return redirect('index')
         return render(request, 'others/auth.html')
 
+
+class GoToHomeView(View):
+    def get(self, request):
+        return render(request, 'others/glowing button.html')

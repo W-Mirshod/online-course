@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodewithFaraz</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0e1538;
+            margin: 0;
+        }
+
+        a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 60px;
+            margin: 40px;
+            text-decoration: none;
+            overflow: hidden;
+            transition: 1s;
+        }
+
+        a:hover {
+            background: #22e622;
+            box-shadow: 0 0 10px #22e622,
+            0 0 30px #22e622,
+            0 0 60px #22e622,
+            0 0 100px #22e622;
+        }
+
+        a::before {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 400%;
+            background: #22e622;
+            transition: 1s;
+            animation: animate 2s linear infinite;
+        }
+
+        a:hover::before {
+            width: 120%;
+        }
+
+        a::after {
+            content: "";
+            position: absolute;
+            background: #0e1538;
+            inset: 4px;
+            transition: 0.5s;
+        }
+
+        a:hover::after {
+            background: #22e622;
+        }
+
+        a span {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            font-size: 2em;
+            letter-spacing: 4px;
+            transition: 0.5s;
+            opacity: 0.8;
+        }
+
+        a:hover span {
+            opacity: 1;
+            color: #000;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<a href="{% url 'index' %}">
+    <span>Go To the Home Page</span>
+</a>
+    
+<p>http://127.0.0.1:8000/ is not a valid url</p>
+</body>
+</html>

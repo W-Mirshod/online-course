@@ -1,4 +1,6 @@
 from django import forms
+from django.core.mail import send_mail
+
 from courses.models import Course, Category, User, Comment, BoughtCourse, ContactMessage
 from teachers.models import Teacher
 
@@ -34,6 +36,18 @@ class SignUpForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+    def send_email(self, user):
+        token = user.profile.activation_token
+        activation_link = f"http://127.0.0.1:8000/courses/activate/{token}"
+
+        send_mail(
+            subject="Account Activation",
+            message=f"Please click the following link to activate your account: {activation_link}",
+            from_email='W Man',
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
 
 
 class LoginForm(forms.Form):

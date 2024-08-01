@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -148,3 +150,10 @@ class ContactMessage(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    activation_token = models.UUIDField(default=uuid.uuid4, editable=False)
+
+    objects = models.Manager

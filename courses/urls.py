@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from courses.views.details import CourseDetailPage, CategoryDetailPage, StudentRoomPage
-from courses.views.authentication import SignUpView, LogInView, LogOutView
+from courses.views.authentication import SignUpView, LogInView, LogOutView, ActivateView
 from courses.views.views import IndexPage, CoursesPage, ContactPage, AboutPage, BaseIndexPage, AddComment, \
     DeleteComment, GettingCourses
 
@@ -23,4 +23,5 @@ urlpatterns = [  # index
                   path('sign-in/', LogInView.as_view(), name='sign_in'),
                   path('log-out/', LogOutView.as_view(), name='log_out'),
                   path('sign-up/', SignUpView.as_view(), name='sign_up'),
+                  path('activate/<str:token>/', ActivateView.as_view(), name='activate'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

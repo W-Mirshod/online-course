@@ -1,10 +1,8 @@
 import os
 import json
-
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
 from courses.models import Course, Comment, User
 from root.settings import BASE_DIR
 from django.dispatch import receiver
@@ -13,7 +11,7 @@ from django.db.models.signals import pre_delete, post_save
 
 @receiver(post_save, sender=User)
 def send_welcome_email(sender, instance, created, **kwargs):
-    if created:
+    if created and User.is_active:
         subject = 'Welcome to Falcon'
         context = {'customer': instance}
         html_message = render_to_string('info/welcoming.html', context)
