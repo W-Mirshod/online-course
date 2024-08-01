@@ -116,13 +116,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'courses.User'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env('E_H_USER')
+EMAIL_HOST_PASSWORD = env('E_H_PASSWORD')
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '216694800477-koaq8pqlbjmlc32vj83jusrpjbt0pb19.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('G_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('G_OAUTH2_SECRET')
+
+SOCIAL_AUTH_FACEBOOK_KEY = env('S_A_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = env('S_A_FACEBOOK_SECRET')
+
+SOCIAL_AUTH_TWITTER_KEY = env('S_A_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = env('S_A_TWITTER_SECRET')
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
