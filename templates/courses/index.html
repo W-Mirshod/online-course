@@ -155,7 +155,7 @@
                                             {% if course.average_rating %}
                                                 <h6 class="m-0"><i
                                                         class="fa fa-star text-primary mr-2"></i>{{ course.average_rating|floatformat:1 }}
-                                                    <small>(250)</small>
+                                                    <small>({{ course.counts_of_ratings }})</small>
                                                 </h6>
                                             {% else %}
                                                 <h6 class="m-0"><i
