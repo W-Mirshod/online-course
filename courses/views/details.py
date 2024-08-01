@@ -9,7 +9,7 @@ class CourseDetailPage(View):
     def get(self, request, slug):
         course = Course.objects.get(slug=slug)
         comments = Comment.objects.filter(course_id__slug=slug).order_by('-created_at')
-        categories = Category.objects.all()
+        categories = Category.objects.annotate(course_count=Count('courses'))
         blogs = Blog.objects.all()
 
         context = {'course': course,
@@ -22,14 +22,10 @@ class CourseDetailPage(View):
 
 class CategoryDetailPage(View):
     def get(self, request, slug):
+        categories = Category.objects.annotate(course_count=Count('courses'))
         category = None
         if Category.objects.filter(slug=slug).exists():
             category = Category.objects.filter(slug=slug).annotate(course_count=Count('courses'))
-        categories = Category.objects.annotate(course_count=Count('courses'))
-        print(categories)
-        print(categories)
-        print(categories)
-        print(categories)
         category_videos = Course.objects.filter(category=category)
         blogs = Blog.objects.all()
 
