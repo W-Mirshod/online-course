@@ -342,21 +342,23 @@
                                 <h1 class="m-0">Buy Courses Now</h1>
                             </div>
                             <div class="card-body rounded-bottom bg-primary p-5">
-                                <form>
+                                <form method="post" action="{% url 'ordering' %}">
+                                    {% csrf_token %}
                                     <div class="form-group">
-                                        <input type="text" class="form-control border-0 p-4" placeholder="Your name"
-                                               required="required"/>
+                                        <input type="text" name="name" class="form-control border-0 p-4"
+                                               placeholder="Your name" required="required"/>
                                     </div>
                                     <div class="form-group">
-                                        <select class="custom-select border-0 px-4" style="height: 47px;">
-                                            <option selected>Select a course</option>
-                                            <option value="1">Course 1</option>
-                                            <option value="2">Course 1</option>
-                                            <option value="3">Course 1</option>
+                                        <select name="course_id" class="custom-select border-0 px-4"
+                                                style="height: 47px;" required>
+                                            <option value="" disabled selected>Select a course</option>
+                                            {% for course in courses %}
+                                                <option value="{{ course.id }}">{{ course.title }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div>
-                                        <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now
+                                        <button class="btn btn-dark btn-block border-0 py-3" type="submit">Buy Now
                                         </button>
                                     </div>
                                 </form>

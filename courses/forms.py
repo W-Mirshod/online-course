@@ -1,5 +1,5 @@
 from django import forms
-from courses.models import Course, Category, User, Comment
+from courses.models import Course, Category, User, Comment, BoughtCourse
 from teachers.models import Teacher
 
 
@@ -60,9 +60,7 @@ class CommentForm(forms.Form):
     media_file = forms.FileField(required=False)
 
 
-class GettingCoursesForm(forms.Form):
-    name = forms.CharField(max_length=50)
-    courses = forms.ModelChoiceField(queryset=Course.objects.all())
-
-
-from django import forms
+class GettingCoursesForm(forms.ModelForm):
+    class Meta:
+        model = BoughtCourse
+        fields = ('name', 'course_id',)

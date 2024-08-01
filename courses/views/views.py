@@ -1,8 +1,11 @@
 from django.db.models import Count, Avg, Sum
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import FormView
+
 from blogs.models import Blog
-from courses.forms import CommentForm
+from courses.forms import CommentForm, GettingCoursesForm
 from courses.models import Course, Category, Comment
 from teachers.models import Teacher
 
@@ -88,6 +91,21 @@ class DeleteComment(View):
         comment = get_object_or_404(Comment, id=comment_id)
         comment.delete()
         return redirect('c_detail', slug=slug)
+
+
+class GettingCourses(FormView):
+    template_name = 'courses/index.html'
+    form_class = GettingCoursesForm
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        form.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class ContactPage(View):

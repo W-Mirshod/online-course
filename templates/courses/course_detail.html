@@ -54,13 +54,13 @@
                                     <div class="media-body">
                                         <h6>{{ comment.name }}<small> <i>{{ comment.created_at }}</i></small></h6>
                                         <p>{{ comment.comment }}</p>
-                                        {% if user.is_superuser %}
-                                            <form method="get" action="{% url 'del_comment_course' course.slug %}">
-                                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                                                <button class="btn btn-sm btn-secondary" type="submit">
-                                                    Delete
-                                                </button>
-                                            </form>
+                                        {% if comment.media_file %}
+                                            {% if comment.media_file %}
+                                                <video class="card-img-top" width="640" style="height: auto;" controls>
+                                                    <source src="{{ comment.media_file.url }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            {% endif %}
                                         {% endif %}
                                     </div>
                                     {% if comment.media_file %}

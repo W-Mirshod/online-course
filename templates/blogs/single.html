@@ -50,6 +50,14 @@
                                     <div class="media-body">
                                         <h6>{{ comment.name }}<small> <i>{{ comment.created_at }}</i></small></h6>
                                         <p>{{ comment.comment }}</p>
+                                        {% if comment.media_file %}
+                                            {% if comment.media_file %}
+                                                <video class="card-img-top" width="640" style="height: auto;" controls>
+                                                    <source src="{{ comment.media_file.url }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            {% endif %}
+                                        {% endif %}
                                         {% if user.is_superuser %}
                                             <form method="get" action="{% url 'del_comment_blog' blog.slug %}">
                                                 <input type="hidden" name="comment_id" value="{{ comment.id }}">
@@ -74,7 +82,8 @@
                     <!-- Comment Form -->
                     <div class="bg-secondary rounded p-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h3>
-                        <form method="post" action="{% url 'add_comment_blog' blog.slug %}" enctype="multipart/form-data">
+                        <form method="post" action="{% url 'add_comment_blog' blog.slug %}"
+                              enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="name">Name *</label>
