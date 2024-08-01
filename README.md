@@ -16,6 +16,10 @@
 ![Screenshot 2024-08-01 213834](https://github.com/user-attachments/assets/a2cf6c28-f4cf-4fba-8578-0a396998f6f5)
 
 
+3.5. kurslar faqat sotib olinmaganlari ko'rinadi, sotib olinsa chiqarmaydi yana sotuvga usha User uchun:
+![Screenshot 2024-08-02 033036](https://github.com/user-attachments/assets/569af7cc-b586-4d89-9548-80add388088a)
+
+
 4. optionda databasedagi courselar:
 ![image](https://github.com/user-attachments/assets/6a91c409-0ada-42e6-8344-07b7a306441f)
 
@@ -47,7 +51,7 @@
 
 
 11. agar userda is_superuser True bo'lsa, unda commentlarni o'chiradigan tugma chiqadi saytni o'zidan:
-![Screenshot 2024-08-01 215129](https://github.com/user-attachments/assets/80570c35-8597-454e-b4ff-3b4df2ce9f3a)
+![image](https://github.com/user-attachments/assets/891cc7d1-9113-48b3-ba46-20a824e0de9a)
 
 
 12. categoriesda videolarni ko'rsa bo'ladi pauza tugmasini bosish orqali, ustiga bosilda detail page ga yuborvoradi(hamma modeldan birortasiga rasm berilmasa default rasmni ko'rsatadi):
@@ -72,3 +76,9 @@
 
 17. Welcoming message yuboradi, register bulganda saytga: 
 ![image](https://github.com/user-attachments/assets/8c037d96-d602-4ff4-957c-5ef4c2be42c9)
+
+
+18. student room page  student xarid qilgan kurslarni va user qoldirgan barcha commentlarni chiqarib beradi bu pageda:
+![image](https://github.com/user-attachments/assets/af538321-7089-427a-9c6b-19e8dcb0a6ed)
+![Screenshot 2024-08-01 113415](https://github.com/user-attachments/assets/7ce807b5-a375-4792-8b82-084625479d25)
+
