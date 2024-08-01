@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from courses.models import Course, Category, Comment
+from courses.models import Course, Category, Comment, User
 
 
 @admin.register(Category)
@@ -26,3 +25,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'comment', 'is_published', 'rating', 'written')
     search_fields = ('name', 'email')
     list_filter = ('is_published', 'rating', 'written')
+
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'is_staff', 'is_active')
+    search_fields = ('username', 'email')
+    list_filter = ('is_staff', 'is_active')

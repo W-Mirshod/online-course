@@ -2,7 +2,6 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 class CustomUserManager(BaseUserManager):
-
     def create_user(self, username, password=None, **extra_fields):
         if not username:
             raise ValueError('Users must have an username')
@@ -22,5 +21,3 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True')
 
         return self.create_user(username, password, **extra_fields)
-
-

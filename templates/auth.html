@@ -25,7 +25,7 @@
     <br>
     <br>
     <div class="container" id="container">
-    
+
         <div class="form-container sign-up-container">
             <form method="post">
                 {% csrf_token %}
@@ -50,9 +50,9 @@
                     <div class="error">{{ form.email.errors }}</div>
                 {% endif %}
 
-                <input type="password" name="password1" id="id_password1" placeholder="Password">
-                {% if form.password1.errors %}
-                    <div class="error">{{ form.password1.errors }}</div>
+                <input type="password" name="password" id="id_password" placeholder="Password">
+                {% if form.password.errors %}
+                    <div class="error">{{ form.password.errors }}</div>
                 {% endif %}
 
                 <button style="margin-top: 9px" type="submit" name="submit">Sign Up</button>
@@ -80,7 +80,7 @@
                 <button>Sign In</button>
             </form>
         </div>
-    
+
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">

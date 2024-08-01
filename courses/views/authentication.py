@@ -1,19 +1,22 @@
 from django.contrib.auth import login
-from django.contrib.auth.models import User
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.shortcuts import redirect, render
+from django.views import View
 from courses.forms import SignUpForm
 
-from django.views.generic import CreateView
 
+class SignUpView(View):
+    def get(self, request):
+        form = SignUpForm()
+        return render(request, 'auth.html', {'form': form})
 
-class SignUpView(CreateView):
-    model = User
-    form_class = SignUpForm
-    template_name = 'auth.html'
-    success_url = reverse_lazy('index')
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect(self.success_url)
+    def post(self, request):
+        print(1)
+        form = SignUpForm(request.POST)
+        print(form.errors)
+        print(form.is_valid())
+        if form.is_valid():
+            print(2)
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        return render(request, 'auth.html', {'form': form})

@@ -1,45 +1,36 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from courses.models import Course, Category
+from courses.models import Course, Category, User
 from teachers.models import Teacher
 
 
-class CourseForm(forms.ModelForm):
-    category = forms.ModelChoiceField(
-        queryset=Category.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control'}), )
-    teachers = forms.ModelChoiceField(
-        queryset=Teacher.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control'}), )
+# class CourseForm(forms.ModelForm):
+#     category = forms.ModelChoiceField(
+#         queryset=Category.objects.all(),
+#         widget=forms.Select(attrs={'class': 'form-control'}), )
+#     teachers = forms.ModelChoiceField(
+#         queryset=Teacher.objects.all(),
+#         widget=forms.Select(attrs={'class': 'form-control'}), )
+#
+#     class Meta:
+#         model = Course
+#         fields = ('title', 'description', 'number_of_students', 'price',
+#                   'duration', 'teachers', 'category', 'video',)
 
-    class Meta:
-        model = Course
-        fields = ('title', 'description', 'number_of_students', 'price',
-                  'duration', 'teachers', 'category', 'video',)
 
-
-class SignUpForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-
+class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1')
+        fields = ('username', 'email', 'password')
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError(f'This username "{username}" is already registered')
-        return username
-
-    def clean(self):
-        cleaned_data = super().clean()
-        password1 = cleaned_data.get("password1")
-        return cleaned_data
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password')
+        if len(password1) < 2:
+            raise forms.ValidationError('Password must be at least 3 characters long.')
+        return password1
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.email = self.cleaned_data["email"]
+        user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()
         return user
