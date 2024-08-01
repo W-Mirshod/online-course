@@ -110,6 +110,10 @@ media
 blogs/migrations
 courses/migrations
 teachers/migrations
+deleted/blogs/
+deleted/courses/
+deleted/comments/
+deleted/teachers/
 
 # Spyder project settings
 .spyderproject
